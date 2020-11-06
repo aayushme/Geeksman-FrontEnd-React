@@ -1,0 +1,673 @@
+/*----------  Variables  ----------*/
+:root {
+  --bg-primary: #dbf3f1;
+  --bg-secondary: #bce1f3;
+  --primary: #224056;
+  --secondary: #49c2b9;
+}
+
+/*----------  fonts  ----------*/
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+/*----------  Global Styles  ----------*/
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Rubik, sans-serif;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline: 0px !important;
+  -webkit-appearance: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/*=============================================
+=            HomePage            =
+=============================================*/
+
+.homepage {
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #f6fcfb;
+  background-image: url('/images/svg/bg-binary.svg');
+  background-size: cover;
+}
+
+.owl-theme .item {
+  height: 550px;
+}
+
+/*----------  Login Slide  ----------*/
+.login-slide {
+  padding-top: 10%;
+  text-align: center;
+}
+
+.login-slide-text-content {
+  font-size: 28px;
+}
+
+.login-buttons {
+  margin-top: 24px;
+}
+
+.login-button {
+  font-size: 16px;
+  border: none;
+  color: #eee;
+  background-color: #224056;
+  padding: 8px 72px;
+  margin: 18px;
+  box-shadow: 0 6px 10px 2px #ccc;
+}
+
+.login-button:hover {
+  box-shadow: 0 6px 10px 2px #49c2b9;
+}
+
+.mainLogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 48%;
+  margin-top: -11rem;
+}
+
+@media screen and (max-width: 768px) {
+  .login-slide {
+    padding-top: 30%;
+  }
+
+  .login-slide-text-content {
+    font-size: 20px;
+  }
+
+  .login-button {
+    font-size: 14px;
+    padding: 8px 32px;
+    margin: 18px 16px;
+  }
+}
+
+/*----------  Top Performers slid  ----------*/
+.top-performers-content-container {
+  color: var(--primary);
+  padding-top: 8%;
+  text-align: center;
+}
+
+#top-performers-prize-img {
+  height: 300px;
+}
+
+.top-performers-text {
+  font-size: 48px;
+  font-weight: 500;
+}
+
+.contest-details {
+  font-size: 28px;
+}
+
+.top-performer-name {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .top-performers-content-container {
+    padding-top: 4%;
+  }
+
+  #top-performers-prize-img {
+    height: 200px;
+  }
+
+  .top-performers-text {
+    font-size: 36px;
+  }
+
+  .contest-details {
+    font-size: 22px;
+  }
+
+  .top-performer-name {
+    font-size: 20px;
+  }
+}
+
+/*----------  Contest Slide  ----------*/
+.contest-slide {
+  padding-top: 5%;
+  text-align: center;
+  color: #444;
+}
+
+.contest-box-container {
+  display: inline-block;
+  border: 7px solid #777;
+  margin: auto;
+  padding: 24px 72px;
+  border-radius: 15px;
+}
+
+.contest-title {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.contest-subtitle {
+  font-size: 24px;
+}
+
+.contest-timing {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.register-button {
+  font-size: 18px;
+  border: none;
+  color: #eee;
+  background-color: #224056;
+  padding: 8px 72px;
+  margin: 18px;
+  box-shadow: 0 6px 10px 2px #ccc;
+}
+
+.register-button:hover {
+  box-shadow: 0 6px 10px 2px #49c2b9;
+}
+
+@media screen and (max-width: 768px) {
+  .contest-slide {
+    padding-top: 20%;
+  }
+
+  .contest-box-container {
+    width: 100%;
+    box-sizing: border-box;
+    border: 5px solid #777;
+    padding: 16px 20px;
+    border-radius: 10px;
+  }
+
+  .contest-title {
+    font-size: 32px;
+  }
+
+  .contest-subtitle {
+    font-size: 18px;
+  }
+
+  .contest-timing {
+    margin-top: 8px;
+    font-size: 18px;
+  }
+
+  .register-button {
+    font-size: 16px;
+    padding: 6px 48px;
+    margin: 18px;
+  }
+}
+
+/*=====  End of HomePage  ======*/
+
+/*=============================================
+=            Navbar            =
+=============================================*/
+
+.navbar .navbar-toggler {
+  border-color: none;
+}
+
+.navbar a {
+  color: #224056;
+  font-size: 18px;
+}
+
+.navbar a:hover {
+  color: var(--secondary);
+}
+
+.navbar .navbar-brand {
+  font-size: 26px;
+  font-weight: 600;
+  margin-left: 18px;
+  margin-right: 18px;
+}
+
+.navbar .nav-link {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 18px;
+  margin-right: 18px;
+}
+
+.navbar .navbar-toggler-icon {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAAS0lEQVRoge3WoRGAMAADwJZJu0QlCtkluiksAIfhGsG/jUlcSgEAcupT0PZxrizyZh79tuu2usjXDACAJF8ozQAASPKF0gwAAP7sAvoWDBbvdnE+AAAAAElFTkSuQmCC');
+}
+
+@media screen and (max-width: 768px) {
+  .navbar .nav-link {
+    font-size: 16px;
+  }
+}
+
+/*=====  End of Navbar  ======*/
+
+/*=============================================
+=            Footer            =
+=============================================*/
+
+.footer {
+  background: #ffffffaa;
+  font-size: 11px;
+  font-weight: normal;
+  text-align: center;
+  padding: 30px 18px;
+}
+
+/*=====  End of Footer  ======*/
+
+/*=============================================
+=            Problem            =
+=============================================*/
+
+.problem-container {
+  font-size: 15px;
+  margin-bottom: 36px;
+}
+
+.problem-container .problem-title {
+  font-weight: 600;
+  font-size: 28px;
+  display: inline;
+}
+
+.problem-container .time-and-memory-constraints-container {
+  display: inline;
+  font-size: 10px;
+}
+
+.problem-container .time-limit-container {
+  display: inline;
+  margin: 0 0 0 12px;
+}
+
+.problem-container .memory-limit-container {
+  display: inline;
+  margin: 0 0 0 12px;
+}
+
+.problem-container .problem-description {
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .problem-container .problem-title,
+  .problem-container .time-and-memory-constraints-container {
+    display: block;
+  }
+
+  .problem-container .time-limit-container {
+    margin: 0 12px 0 0;
+  }
+
+  .problem-container .memory-limit-container {
+    margin: 0;
+  }
+
+  .problem-container {
+    font-size: 14px;
+  }
+}
+
+/*----------  Problem Subsection  ----------*/
+.problem-container .problem-subsection {
+  margin: 12px 0;
+}
+
+.problem-container .problem-subsection-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .problem-container .problem-subsection-title {
+    font-size: 14px;
+  }
+}
+
+/*----------  Problem Subsection for SampleIO  ----------*/
+
+.problem-container .higlighted-problem-subsection-content {
+  background-color: #effaf8;
+  padding: 8px;
+}
+
+/*=====  End of Problem  ======*/
+
+/*=============================================
+=            AceEditor            =
+=============================================*/
+
+.ace_content {
+  width: 100%;
+}
+
+.ace-container {
+  margin: 0;
+  box-sizing: border-box;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.editor-buttons-container {
+  padding: 16px 0;
+  background: white;
+}
+
+.editor-button {
+  color: var(--primary);
+  margin: 0 12px 0 0;
+  font-size: 15px;
+  padding: 6px 24px;
+  background: #effaf8;
+  border: 1px solid #ccc;
+}
+
+.editor-button.submit {
+  background: var(--primary);
+  color: #eee;
+  border: 1px solid var(--primary);
+}
+
+.editor-button:hover {
+  box-shadow: 0px 4px 6px 2px hsl(176, 74%, 72%);
+}
+
+@media screen and (max-width: 768px) {
+  .ace_content {
+    width: 100%;
+  }
+}
+
+/*----------  AceUserPreferences  ----------*/
+#ace-user-preferences-container {
+  background: #ebebeb;
+  padding: 6px;
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.ace-user-preference-icon {
+  display: inline-block;
+  margin-left: auto;
+}
+
+.ace-user-preference-dropdown {
+  color: var(--primary);
+  border: 1px solid #ddd;
+  padding: 3px;
+  margin: 0 12px 0 0;
+  background: white;
+}
+
+.ace-user-preference-icon {
+  height: 24px;
+  border: 1px solid #eee;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.ace-user-preference-icon {
+  opacity: 0.4;
+}
+
+@media screen and (max-width: 768px) {
+  .ace-user-preference-icon.full-screen {
+    display: none;
+  }
+}
+
+/*=====  End of AceEditor  ======*/
+
+/*=============================================
+=            Contests            =
+=============================================*/
+
+.contests-container,
+.practice-container {
+  padding: 12px 72px;
+}
+
+@media screen and (max-width: 768px) {
+  .contests-container,
+  .practice-container {
+    padding: 16px;
+  }
+}
+
+/*----------  ContestsHome  ----------*/
+.contests-header {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 16px;
+  background-color: #eee;
+  margin-bottom: 24px;
+}
+
+.contests-section-heading {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.contests-top-performers-container {
+  margin-top: 24px;
+}
+
+.contests-top-performer {
+  padding: 8px 0;
+}
+
+.contests-medal-img {
+  height: 32px;
+  margin-right: 12px;
+}
+
+.contests-top-performer-name {
+  font-size: 16px;
+  display: inline-block;
+}
+
+/*----------  ContestCard  ----------*/
+.contest-card {
+  padding: 24px;
+  background-color: #f1f1f1;
+  margin: 24px;
+  border: 1px solid #dadada;
+  border-radius: 8px;
+}
+
+.contest-card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.contest-card-heading a {
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.contest-card-heading a {
+  text-decoration: none;
+}
+
+.contest-card-description {
+  font-size: 12px;
+  padding: 12px 0;
+}
+
+.contest-card-timer-prefix {
+  font-size: 10px;
+  color: #777;
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+
+.contest-card-timer {
+  font-size: 12px;
+}
+
+.contest-card .contes-card-time {
+  color: var(--secondary);
+}
+
+.contest-card-register-button {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-top: 16px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--bg-primary);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.contest-card-register-button:hover {
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: #eee;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*----------  ContestHome  ----------*/
+#contest-home .contest-name {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+#contest-home .contest-remaining-time {
+  font-size: 15px;
+}
+
+#contest-home .contest-instructions-container {
+  margin: 16px 0;
+}
+
+#contest-home .contest-instructions-heading {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#contest-home .contest-instructions {
+  font-size: 15px;
+}
+
+#contest-home .contest-register-button {
+  width: 200px;
+  display: block;
+  margin: 16px auto;
+  font-size: 16px;
+  padding: 8px 32px;
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+}
+
+#contest-home .contest-register-button:hover {
+  box-shadow: 0 6px 10px 2px #49c2b9;
+  text-decoration: none;
+}
+
+/*=============================================
+=            Problems            =
+=============================================*/
+
+.problems-problem-container {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--primary);
+}
+
+.problems-problem-title {
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.problems-problem-level,
+.problems-problem-accuracy {
+  display: inline-block;
+  color: var(--secondary);
+  font-size: 12px;
+}
+
+.problems-solve-button {
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.problems-solve-button:hover {
+  color: var(--secondary);
+}
+
+/*=====  End of Problems  ======*/
+
+/*=============================================
+=            Practice            =
+=============================================*/
+
+.problem-tags-container {
+  padding: 24px;
+  background: #eee;
+  border-radius: 12px;
+}
+
+.problem-tags-heading {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.practice-container .tag-title {
+  padding: 6px 16px;
+  color: white;
+  background: var(--primary);
+  display: inline-block;
+  border-radius: 12px;
+  margin: 4px 4px;
+  cursor: pointer;
+}
+
+/*=====  End of Practice  ======*/

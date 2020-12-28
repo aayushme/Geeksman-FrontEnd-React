@@ -117,7 +117,7 @@ This section has moved here: [https://geeksmanjcbust.in/](https://facebook.githu
   </tr>
 </table>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Linkedin Badge](https://img.shields.io/badge/-Sanyam_Mittal-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/sanyam1992000/)](https://www.linkedin.com/in/sanyam1992000/)
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Linkedin Badge](https://img.shields.io/badge/-Aayush_Tyagi-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/aayush-tyagi-30a293185//)](https://www.linkedin.com/in/aayush-tyagi-30a293185//)
 
 [Back to Table of Contents](#table-of-contents)

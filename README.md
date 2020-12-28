@@ -1,4 +1,53 @@
-# Geeksman 2k21 Frontend
+![open issues](https://img.shields.io/github/issues/Manan-YMCA/xunbao-2020)
+![open issues](https://img.shields.io/github/forks/Manan-YMCA/xunbao-2020)
+![open issues](https://img.shields.io/github/stars/Manan-YMCA/xunbao-2020)
+![open issues](https://img.shields.io/github/contributors/Manan-YMCA/xunbao-2020)
+[![Visits Badge](https://badges.pufler.dev/visits/Manan-YMCA/xunbao-2020)](https://badges.pufler.dev)
+
+# Geeksman2k21 FrontEnd (Contest Website)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-js.svg)](https://forthebadge.com)
+
+
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+  * [Available Scripts](#availablescripts)
+* [Frontend](#frontend)
+* [Screenshots](#screenshots)
+* [Authors](#authors)
+* [Contributing](#contributing)
+* [License](#license)
+
+## About the Project
+[Geeksman](https://geeksmanjcbust.in/) is the Contest Website of Geeksman the official Coding club of CE Department of [JC Bose University of Science and Technology](https://jcboseust.ac.in/), developed by members of [Geeksman](https://geeksmanjcbust.in/). We are a team of 50+ students. The website is loved by everyone for conductiong contests.
+ 
+### Built With
+*   ReactJs
+*   Redux
+*   MDB(Material Design Bootstraps)
+
+[Back to Table of Contents](#table-of-contents)
+
+## Getting Started
+
+### Prerequisites
+
+* ReactJs
+* Redux
+
+### Installation
+
+* Frontend
+
+    ```NodeJs
+    npm i node-modules
+    npm start
+    ```
+
 
 ## Available Scripts
 
@@ -24,46 +73,62 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
+### `Deployment`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This section has moved here: [https://geeksmanjcbust.in/](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Frontend
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* #### ReactJs
+    React is an open-source, front end, JavaScript library for building user interfaces or UI components. It is maintained by Facebook and a community of individual developers and companies. React can be used as a base in the development of single-page or mobile applications.
+    
+    * ###### Why reactJS ?
+    
+        *  Component-Based
+        *  Declarative 
+        *  Incredibly versatile
+        *  Learn Once, Write Anywhere
+        
+* #### MDB
+     The most popular UI KIT for building responsive, mobile-first websites and apps - free for personal & commercial use.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* #### REDUX
+    Redux is a state management library.Redux is an open-source JavaScript library for managing application state. It is most commonly used with libraries such as React Angular for building user interfaces.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* #### Axios
+     Axios is a popular, promise-based HTTP client that sports an easy-to-use API and can be used in both the browser and Node. js. Making HTTP requests to fetch or save data is one of the most common tasks a client-side JavaScript application will need to do.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[Back to Table of Contents](#table-of-contents)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Screenshots
 
-### Code Splitting
+## Authors
+<table>
+  <tr>
+    <td align="center">
+        <a href="https://github.com/aayushme/">
+            <img src="https://avatars2.githubusercontent.com/u/44281902?s=400&u=e943101b7644437b9acd95c05ef99406e71dcd68&v=4" width="100px;" alt="" style="border-radius:50%;" /><br />
+        </a>
+            <br><a href="https://github.com/Manan-YMCA/xunbao-2020/commits?author=aayushme" title="Code">💻<b>Aayush Tyagi</b></a>
+    </td>
+   
+  </tr>
+</table>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Linkedin Badge](https://img.shields.io/badge/-Sanyam_Mittal-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/sanyam1992000/)](https://www.linkedin.com/in/sanyam1992000/)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Linkedin Badge](https://img.shields.io/badge/-Aayush_Tyagi-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/aayush-tyagi-30a293185//)](https://www.linkedin.com/in/aayush-tyagi-30a293185//)
 
-### Analyzing the Bundle Size
+[Back to Table of Contents](#table-of-contents)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### Making a Progressive Web App
+Please make sure to update tests as appropriate.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 

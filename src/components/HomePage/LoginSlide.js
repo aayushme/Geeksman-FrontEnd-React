@@ -1,13 +1,11 @@
 import React from 'react'
-import Logo from '../images/gif/234.gif';
+import geeksman from "../images/png/geeksman.png"
 const LoginSlide = () => {
     return (
         <div className="login-slide container-fluid">   
-           <div className="mainLogo">
-           	<img src={Logo} alt="logo" / >
-           </div>
-            <div className="login-slide-text-content">
-                Join the <strong>Competitive Coding Community</strong> <br />
+           
+            <div className="login-slide-text-content"><h1>Geeksman - The Coding Society</h1><br/>
+                Join the <strong>Competitive Coding Society</strong> of JCBOSE UST <br />
                 Practice coding, prepare for contests, and win challenges.
             </div>
             <div className="login-buttons">

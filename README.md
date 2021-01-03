@@ -2,7 +2,7 @@
 ![open issues](https://img.shields.io/github/forks/geeksman-JCBOSE/GeeksMan-2k21-FrontEnd)
 ![open issues](https://img.shields.io/github/stars/geeksman-JCBOSE/GeeksMan-2k21-FrontEnd)
 ![open issues](https://img.shields.io/github/contributors/geeksman-JCBOSE/GeeksMan-2k21-FrontEnd)
-[![Visits Badge](https://badges.pufler.dev/visits/geeksman-JCBOSE/GeeksMan-2k21-FrontEnd)](https://badges.pufler.dev)
+
 
 # Geeksman2k21 FrontEnd (Contest Website)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)  [![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-js.svg)](https://forthebadge.com)

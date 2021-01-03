@@ -8,15 +8,21 @@ import {
   MDBModalFooter,
 } from "mdbreact";
 
-function LoginModal(props) {
-  const [modal, setModal] = useState(true);
-  const toggle = () => {
+class LoginModal extends Component {
+  state={
+    modal:true
+  }
+
+  toggle = () =>{
+    console.log("hello");
     
-  };
+  }
+  
+  render(){
   return (
     <MDBContainer>
-      <MDBModal isOpen={modal&&props.show} toggle={toggle()} size="lg">
-        <MDBModalHeader toggle={toggle()}>MDBModal title</MDBModalHeader>
+      <MDBModal isOpen={this.props.show} toggle={this.toggle()} size="lg">
+        <MDBModalHeader toggle={this.toggle()}>MDBModal title</MDBModalHeader>
         <MDBModalBody>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -24,7 +30,7 @@ function LoginModal(props) {
           aliquip ex ea commodo consequat.
         </MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={toggle()}>
+          <MDBBtn color="secondary" onClick={this.toggle()}>
             Close
           </MDBBtn>
           <MDBBtn color="primary">Save changes</MDBBtn>
@@ -32,6 +38,7 @@ function LoginModal(props) {
       </MDBModal>
     </MDBContainer>
   );
+}
 }
 
 export default LoginModal;

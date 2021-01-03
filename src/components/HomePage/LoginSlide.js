@@ -21,7 +21,6 @@ function LoginSlide()  {
                 <button className="login-button" onClick={() => window.location.href = 'https://www.google.com'}>Sign Up</button>
             </div>
         </div>
-        
         </>
     );
 }

@@ -9,20 +9,23 @@ import {
 } from "mdbreact";
 
 class LoginModal extends Component {
+
   state={
-    modal:true
+    modal:localStorage.getItem("LoginModal"),
   }
 
-  toggle = () =>{
+  toggle = (e) =>{
+    e.preventDefault();
     console.log("hello");
-    
+    this.setState({modal:false});
+    localStorage.setItem("LoginModal",false);
   }
   
   render(){
   return (
     <MDBContainer>
-      <MDBModal isOpen={this.props.show} toggle={this.toggle()} size="lg">
-        <MDBModalHeader toggle={this.toggle()}>MDBModal title</MDBModalHeader>
+      <MDBModal isOpen={this.state.modal}  size="lg">
+        <MDBModalHeader >MDBModal title</MDBModalHeader>
         <MDBModalBody>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -30,7 +33,7 @@ class LoginModal extends Component {
           aliquip ex ea commodo consequat.
         </MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={this.toggle()}>
+          <MDBBtn color="secondary" onClick={this.toggle}>
             Close
           </MDBBtn>
           <MDBBtn color="primary">Save changes</MDBBtn>

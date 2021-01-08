@@ -1,3 +1,3 @@
-export { auth, logout, authCheckStatus } from './auth';
+export { reduxLogin,reduxSignup, logout, authCheckStatus } from './auth';
 
 

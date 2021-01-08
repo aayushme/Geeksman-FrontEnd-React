@@ -5,6 +5,7 @@ import Practice from './Practice';
 import Contests from './Contest/Contests';
 import About from './About';
 import Ace from './Ace/Ace';
+import LoginPage from './HomePage/loginpage'
 import NotFound from './NotFound';
 
 const MainLayout = () => {
@@ -13,6 +14,7 @@ const MainLayout = () => {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={HomePage} />
+                    <Route path="/login" component={LoginPage}/>
                     <Route path="/practice" component={Practice} />
                     <Route path="/contests" component={Contests} />
                     <Route path="/about" component={About} />

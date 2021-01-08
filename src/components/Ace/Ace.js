@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Fullscreen from "react-full-screen";
+import {FullScreen}  from "react-full-screen";
 import AceEditor from "react-ace";
 import AceOptions from './AceOptions';
 import AceUserPreferences from './AceUserPreferences';
@@ -27,10 +27,7 @@ const Ace = () => {
 
     return (
         <div>
-            <Fullscreen
-                enabled={isFull}
-                onChange={(full) => { setIsFull(full) }}
-            >
+            
                 <div className="ace-container">
                     <AceUserPreferences theme={theme} setTheme={setTheme} language={language} setLanguage={setLanguage} fontSize={fontSize} setFontSize={setFontSize} isFull={isFull} setIsFull={setIsFull} editorHeight={editorHeight} setEditorHeight={setEditorHeight} />
                     <AceEditor
@@ -45,7 +42,7 @@ const Ace = () => {
                         {...AceOptions}
                     />
                 </div>
-            </Fullscreen>
+           
             <div className="editor-buttons-container">
                 <input className="editor-button compile-and-run" type="button" value="Compile and Run" />
                 <input className="editor-button submit" type="button" value="Submit" />

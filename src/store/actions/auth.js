@@ -7,11 +7,10 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (tokenId, designationId, full_nameId) => {
+export const authSuccess = (tokenId, full_nameId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     token: tokenId,
-    designation: designationId,
     name: full_nameId,
   };
 };
@@ -25,15 +24,61 @@ export const authFail = (error) => {
 
 export const logout = () => {
   localStorage.removeItem('token');
-  localStorage.removeItem('cookies');
   localStorage.removeItem('full_name');
-  localStorage.removeItem('designation');
   return {
     type: actionTypes.AUTH_LOGOUT,
   };
 };
 
-export const auth = (user_name, pwd) => {
+export const reduxLogin = (email, password) => {
+  return (dispatch) => {
+    dispatch(authStart());
+    var postData = JSON.stringify({
+      email: email,
+      password: password,
+    });
+
+    let axiosConfig = {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+    };
+
+    axios
+      .post(
+        process.env.PUBLIC_API_URL+'/rest-auth/login/',
+        postData,
+        axiosConfig
+      )
+      .then((res) => {
+        console.log('RESPONSE RECEIVED: ', res);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('full_name', res.data.full_name);
+        dispatch(
+          authSuccess(res.data.token, res.data.designation, res.data.full_name)
+        );
+      })
+      .catch((err) => {
+        dispatch(authFail(err));
+      });
+  };
+};
+
+export const authCheckStatus = () => {
+  return (dispatch) => {
+    const token = localStorage.getItem('token');
+    const full_name = localStorage.getItem('full_name');
+    if (!token) {
+      dispatch(logout());
+    } else {
+      dispatch(authSuccess(token, full_name));
+    }
+  };
+};
+
+/*============Redux Signup===========*/
+
+export const reduxSignup = (user_name, pwd) => {
   return (dispatch) => {
     dispatch(authStart());
     var postData = JSON.stringify({
@@ -66,18 +111,5 @@ export const auth = (user_name, pwd) => {
       .catch((err) => {
         dispatch(authFail(err));
       });
-  };
-};
-
-export const authCheckStatus = () => {
-  return (dispatch) => {
-    const token = localStorage.getItem('token');
-    const designation = localStorage.getItem('designation');
-    const full_name = localStorage.getItem('full_name');
-    if (!token) {
-      dispatch(logout());
-    } else {
-      dispatch(authSuccess(token, designation, full_name));
-    }
   };
 };

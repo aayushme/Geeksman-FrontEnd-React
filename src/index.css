@@ -888,3 +888,13 @@ nav {
 }
 
 /*=====  End of Practice  ======*/
+
+.questionpageheader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between!important;
+  width: 75vw!important;
+}
+.timeinfo span{
+  font-size: 1.2rem;
+}

@@ -8,6 +8,7 @@ import Ace from './Ace/Ace';
 import LoginPage from './HomePage/loginpage'
 import NotFound from './NotFound';
 import ResponsiveDrawer from './questionpage/Questiondrawer'
+import UserPanel from './userpanel/userpanel'
 const MainLayout = () => {
     return (
         <div className="main-layout">
@@ -20,6 +21,7 @@ const MainLayout = () => {
                     <Route path="/about" component={About} />
                     <Route path="/ace" component={Ace} />
                     <Route path="/questionpage" component={ResponsiveDrawer} />
+                    <Route path="/userpanel" component={UserPanel} />
                     <Route path="*" component={NotFound} />
                 </Switch>
             </BrowserRouter>

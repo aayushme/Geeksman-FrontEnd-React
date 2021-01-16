@@ -14,7 +14,7 @@ function Developerscard({image,name,stack}) {
     <div class="about">{stack}</div>
     <div class="social-icons">
       <Link href="#" className="fb"><i class="fab fa-facebook-f"></i></Link>
-      <Link href="#" className="twitter"><i class="fab fa-twitter"></i></Link>
+      <Link href="#" className="github"><i class="fab fa-github"></i></Link>
       <Link href="#" className="insta"><i class="fab fa-instagram"></i></Link>
       <Link href="#" className="linkedin"><i class="fab fa-linkedin"></i></Link>
     </div>

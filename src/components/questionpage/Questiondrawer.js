@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -18,8 +18,11 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import Button from '@material-ui/core/Button'
+import DoneIcon from "@material-ui/icons/Done";
+import Button from "@material-ui/core/Button";
+import * as actions from "../../store/actions/index";
+import { connect } from "react-redux";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -61,91 +64,165 @@ function ResponsiveDrawer(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [selectedindex, setselected] = React.useState(0);
+  const [selectedOption, setSelectedOption] = React.useState({});
+  const [activequestion, setactivequestion] = React.useState(
+    props.questiondata[0]
+  );
+  const [tickicon, setTickicon] = React.useState(
+    <DoneIcon style={{ color: "green" }} />
+  );
+  const [value, setValue] = React.useState(activequestion.options.opt1.value);
+  const [savedindex, setSavedindex] = React.useState(null);
+  const [hour,setHour] = React.useState(-1);
+  const [minutes,setMinutes] = React.useState(-1);
+  const [seconds,setSeconds] = React.useState(-1);
+
+  //Mobile Screen
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const [questions, setquestions] = React.useState([
-    {
-      questionno: "Question1",
-      question: "what ifadsfasdfadsfads",
-      options: {
-        option1: "are you ok1",
-        option2: "are you ok2",
-        option3: "are you ok3",
-        option4: "are you ok4",
-      },
-    },
 
-    {
-      questionno: "Question2",
-      question: "what isflkadslflkamsdlkflk",
-      options: {
-        option1: "are you ok1",
-        option2: "are you ok2",
-        option3: "are you ok3",
-        option4: "are you ok4",
-      },
-    },
-    {
-      questionno: "Question3",
-      question: "what is the ans wow",
-      options: {
-        option1: "are you ok1",
-        option2: "are you ok2",
-        option3: "are you ok3",
-        option4: "are you ok4",
-      },
-    },
-    {
-      questionno: "Question4",
-      question: "what is tafalksdjlfjlasd",
-      options: {
-        option1: "are you ok1",
-        option2: "are you ok2",
-        option3: "are you ok3",
-        option4: "are you ok4",
-      },
-    },
-    {
-      questionno: "Question5",
-      question: "what is tfakjsdfjajsdl",
-      options: {
-        option1: "are you ok1",
-        option2: "are you ok2",
-        option3: "are you ok3",
-        option4: "are you ok4",
-      },
-    },
-    {
-      questionno: "Question6",
-      question: "what is fakjdsfljsd",
-      options: {
-        option1: "are you ok13532",
-        option2: "are you ok2523",
-        option3: "are you ok3",
-        option4: "are you ok4",
-      },
-    },
-  ]);
-  const [activequestion, setactivequestion] = React.useState(questions[0]);
+  //get Questions
+  useEffect(() => {
+    
+    var countDownDate = new Date("Sep 25, 2025 11:37:00").getTime();
 
-  const [value, setValue] = React.useState("female");
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+      // Get todays date and time
+      var now = new Date().getTime();
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+      // Find the distance between now an the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      setHour(hours);
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      setMinutes(minutes);
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      setSeconds(seconds);
+      // Output the result in an element with id="demo"
+      
+      // If the count down is over, write some text
+      if(hours===0 && seconds===0 && minutes===0){
+        clearInterval(x);
+        handlePostQuestions();
+        console.log("done");
+      }
+      
+    }, 1000);
+    
+  }, []);
+
+  //Submit Button
+  const handlePostQuestions = () => {
+    console.log("posted")
+    props.postQuestions(props.token, localStorage.getItem(["submissions"]));
   };
-  const drawer = (
+
+  //Load Selection of Radio Buttons
+  const createSelection = (e, value) => {
+    setValue(e.target.value);
+  };
+
+  const createArrayQuestions = (e) => {
+    e.preventDefault();
+
+    var myArray = [];
+    // load saved array
+    if (localStorage.getItem(["submissions"]) != null) {
+      myArray = JSON.parse(localStorage.getItem(["submissions"]));
+    }
+
+    var data = {
+      Question_Id: activequestion.id,
+      optionchosen: value,
+    };
+
+    console.log(myArray.length);
+
+    if (myArray.find((element) => element.Question_Id === activequestion.id)) {
+      for (var i = 0; i < myArray.length; i++) {
+        if (myArray[i].Question_Id === activequestion.id) {
+          myArray[i] = data;
+        }
+      }
+    } else {
+      myArray.push(data);
+    }
+
+    // re-save array
+    localStorage.setItem(["submissions"], JSON.stringify(myArray));
+  };
+
+  //Clear Selection
+  const removeArrayQuestions = (e) => {
+    e.preventDefault();
+    setValue("#");
+    localStorage.removeItem(["submissions"]);
+  };
+
+  //Handle Previous Button
+  const handlePrev = (e) => {
+    e.preventDefault();
+    if (selectedindex !== 0) {
+      setselected(selectedindex - 1);
+      setactivequestion(props.questiondata[selectedindex - 1]);
+      console.log(selectedindex - 1);
+    } else {
+      setselected(selectedindex);
+      setactivequestion(props.questiondata[selectedindex]);
+    }
+  };
+
+  //Handle Next Button
+  const handleNext = (e) => {
+    e.preventDefault();
+    var len = Object.keys(props.questiondata).length - 1;
+    if (selectedindex !== len) {
+      setselected(selectedindex + 1);
+      setactivequestion(props.questiondata[selectedindex + 1]);
+      console.log(selectedindex + 1);
+    } else {
+      setselected(selectedindex);
+      setactivequestion(props.questiondata[selectedindex]);
+    }
+  };
+
+  //Handle Green Tick
+
+  const handleGreenTick = (index) => {
+    var myArray = [];
+    if (localStorage.getItem(["submissions"]) !== null) {
+      myArray = JSON.parse(localStorage.getItem(["submissions"]));
+    }
+
+    const help = myArray.findIndex((rank) => rank.Question_Id === index);
+    console.log(help);
+    if (help >= 0 && help <= 49) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  //Drawer Map
+  var drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {questions.map((questions, index) => (
+        {props.questiondata.map((questions, index) => (
           <React.Fragment>
             <ListItem
               button
               alignItems="center"
+              index={index}
               selected={selectedindex === index}
-              key={questions.questionno}
+              key={questions.id}
               onClick={() => {
                 setactivequestion(questions);
                 setselected(index);
@@ -155,7 +232,14 @@ function ResponsiveDrawer(props) {
                 {" "}
                 <QuestionIcon />{" "}
               </ListItemIcon>
-              <ListItemText center primary={questions.questionno} />
+              <ListItemText center primary={"Question-" + index} />
+              <ListItemIcon>
+                {localStorage.getItem(["submissions"])
+                  ? handleGreenTick(questions.id)
+                    ? tickicon
+                    : null
+                  : null}
+              </ListItemIcon>
             </ListItem>
             <Divider />
           </React.Fragment>
@@ -163,6 +247,9 @@ function ResponsiveDrawer(props) {
       </List>
     </div>
   );
+
+  //Timer
+
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -182,15 +269,25 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            
             <div className="questionpageheader">
               <div className="timeinfo">
-              <span>00hr 00min</span>
+                <span>{hour}hr {minutes}min {seconds}sec</span>
               </div>
-             
+
               <div className="prevnextbtn">
-                <Button color="danger">&larr; prev</Button>
-                <Button color="danger">next &rarr;</Button>
+                <Button color="danger" onClick={(e) => handlePrev(e)}>
+                  &larr; prev
+                </Button>
+                <Button color="danger" onClick={(e) => handleNext(e)}>
+                  next &rarr;
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={(e) => handlePostQuestions(e)}
+                >
+                  Submit
+                </Button>
               </div>
             </div>
           </Typography>
@@ -238,33 +335,46 @@ function ResponsiveDrawer(props) {
           </div>
           <div className="optionsselect">
             <FormControl component="fieldset">
-              <RadioGroup
-                aria-label="gender"
-                name="gender1"
-                value={value}
-                onChange={handleChange}
-              >
+              <RadioGroup aria-label="Questions" name="Question" value={value}>
                 <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label={activequestion.options.option1}
+                  value={activequestion.options.opt1.value}
+                  control={<Radio onClick={(e) => createSelection(e)} />}
+                  label={activequestion.options.opt1.option}
                 />
                 <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label={activequestion.options.option2}
+                  value={activequestion.options.opt2.value}
+                  control={<Radio onClick={(e) => createSelection(e)} />}
+                  label={activequestion.options.opt2.option}
                 />
                 <FormControlLabel
-                  value="other"
-                  control={<Radio />}
-                  label={activequestion.options.option3}
+                  value={activequestion.options.opt3.value}
+                  control={<Radio onClick={(e) => createSelection(e)} />}
+                  label={activequestion.options.opt3.option}
                 />
                 <FormControlLabel
-                  value="disabled"
-                  control={<Radio />}
-                  label={activequestion.options.option3}
+                  value={activequestion.options.opt4.value}
+                  control={
+                    <Radio
+                      onClick={(e) => createSelection(e, e.target.value)}
+                    />
+                  }
+                  label={activequestion.options.opt4.option}
                 />
               </RadioGroup>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={(e) => createArrayQuestions(e)}
+              >
+                Save
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={(e) => removeArrayQuestions(e)}
+              >
+                Clear
+              </Button>
             </FormControl>
           </div>
         </Typography>
@@ -273,4 +383,22 @@ function ResponsiveDrawer(props) {
   );
 }
 
-export default ResponsiveDrawer;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getQuestions: (token) => {
+      dispatch(actions.getQuestions(token));
+    },
+    postQuestions: (token, data) => {
+      dispatch(actions.postQuestions(token, data));
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    questiondata: state.question.questionsdata,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResponsiveDrawer);

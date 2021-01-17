@@ -109,6 +109,19 @@ a:hover {
   padding: 8px 72px;
   margin: 18px;
   box-shadow: 0 6px 10px 2px #ccc;
+  text-decoration: none;
+}
+
+
+.login-button:hover {
+  font-size: 16px;
+  border: none;
+  color: #eee;
+  background-color: #224056;
+  padding: 8px 72px;
+  margin: 18px;
+  box-shadow: 0 6px 10px 2px #ccc;
+  text-decoration: none;
 }
 
 .login-button:hover {
@@ -123,7 +136,18 @@ a:hover {
   margin-top: -11rem;
 }
 
-@media screen and (max-width: 768px) {
+.mainpng{
+  height: 16.4rem;
+  margin-top: -7rem;
+  margin-bottom: -3rem;
+}
+.owl-carousel .owl-item img {
+  width: 32% !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (max-width: 600px){
   .login-slide {
     padding-top: 30%;
   }
@@ -133,11 +157,26 @@ a:hover {
   }
 
   .login-button {
-    font-size: 14px;
-    padding: 8px 32px;
-    margin: 18px 16px;
+    font-size: 14px !important;
+    padding: 8px 32px !important;
+    margin: 18px 16px !important;
   }
+
+  .mainpng{
+    height: 12rem;
+    margin-top: -7rem;
+    margin-bottom: -3rem;
+  }
+  .owl-carousel .owl-item img {
+    width: 105% !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
 }
+
 
 /*------------Login Page-------------*/
 

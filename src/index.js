@@ -7,10 +7,9 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import authReducer from './store/reducers/auth';
-import dotenv from 'dotenv';
+import questionReducer from './store/reducers/questionpage'
+import contestReducer from './store/reducers/contest'
 
-
-dotenv.config({ path: './config/config.env' });
 
 //Redux Store
 const composeEnhancers =
@@ -20,6 +19,8 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  question:questionReducer,
+  contest:contestReducer
 });
 
 const store = createStore(

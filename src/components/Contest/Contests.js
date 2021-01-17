@@ -1,23 +1,58 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { Route } from 'react-router-dom';
 import ContestsHome from './ContestsHome';
 import ContestHome from './ContestHome';
-import ContestProblem from './ContestProblem';
-import ContestProblems from './ContestProblems';
+import ContestProblem from '../questionpage/Questiondrawer';
 import Navbar from '../Navbar';
+import * as actions from "../../store/actions/index";
+import { connect } from "react-redux";
 
-const Contests = () => {
+class Contests extends Component {
+
+
+    
+  DynamicRoutes = (
+    
+    this.props.data.map((contest, index) => (
+        <>
+        <Route exact path={"/contests/"+contest.name+"/"} component={ContestHome} />
+        <Route exact path={"/contests/"+contest.name+"/questions/"} component={ContestProblem} />
+        </>
+    ))
+);
+
+
+    render(){
     return (
         <div className="contests-container">
             <div className="contests">
                 <Navbar />
                 <Route exact path="/contests/" component={ContestsHome} />
-                <Route exact path="/contests/:contestId/" component={ContestHome} />
-                <Route exact path="/contests/:contestid/problems/" component={ContestProblems} />
-                <Route exact path="/contests/:contestid/problems/:problemId/" component={ContestProblem} />
+                {this.DynamicRoutes} 
             </div>
         </div>
     );
 }
+}
 
-export default Contests;
+const mapDispatchToProps = (dispatch) => {
+    return {
+      getQuestions: (token) => {
+        dispatch(actions.getQuestions(token));
+      },
+      postQuestions: (token, data) => {
+        dispatch(actions.postQuestions(token, data));
+      },
+    };
+  };
+  
+  const mapStateToProps = (state) => {
+    return {
+      token: state.auth.token,
+      data: state.contest.contestdata,
+    };
+  };
+
+
+
+  export default connect(mapStateToProps, mapDispatchToProps)(Contests);

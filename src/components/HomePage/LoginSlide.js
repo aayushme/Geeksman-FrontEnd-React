@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import LoginModal from "../utils/modals/modal";
+import mainpng from "../images/png/main.png"
 import { Link } from "react-router-dom";
 
 
@@ -12,10 +12,11 @@ class LoginSlide extends Component {
     return (
       <>
         <div className="login-slide container-fluid">
+          <img src={mainpng} className="mainpng" alt="mainimg"/>
           <div className="login-slide-text-content">
             <h1>Geeksman - The Coding Society</h1>
             <br />
-            Join the <strong>Competitive Coding Society</strong> of JCBOSE UST{" "}
+            Join the <strong>Coding Society</strong> of CE Department of JCBOSE UST{" "}
             <br />
             Practice coding, prepare for contests, and win challenges.
           </div>

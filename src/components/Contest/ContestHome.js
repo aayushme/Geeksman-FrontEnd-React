@@ -1,33 +1,39 @@
-import React from 'react';
+import React,{Component} from 'react';
 import ContestHeader from './ContestHeader';
 import { Link } from 'react-router-dom';
+import * as actions from "../../store/actions/index";
+import { connect } from "react-redux";
+import { data } from 'jquery';
 
-const ContestHome = () => {
+
+class ContestHome extends Component {
+    
+    
+    render(){
+        var id=JSON.parse(localStorage.getItem("activecontest"))-1;
     return (
         <div id="contest-home">
             <ContestHeader content="Contests" />
             <div className="row">
                 <div className="col-md-7">
                     <div className="contest-name">
-                        Code For YMCA
+                        {this.props.data[id].name}
                     </div>
                     <div className="contest-remaining-time">
-                        The contest will start in 2 days 21 hours 28 minutes 47 seconds.
+                        The contest will start at {this.props.data[id].starttime} on {this.props.data[id].startdate}
                     </div>
                     <div className="contest-instructions-container">
                         <div className="contest-instructions-heading">
                             Instructions
                         </div>
                         <div className="contest-instructions">
-                            The penalty time has been changed from 10 minutes to 5 minutes for each wrong submission.
-                            All submissions will be run through a plagiarism checker.
-                            Any detected plagiarism will result in immediate disqualification + 3 weeks account ban. Cheating will NOT be tolerated in any way, shape, or form.
+                            {this.props.data[id].rules}
                         </div>
                     </div>
                 </div>
                 <div className="col-md-5">
-                    <button className="contest-register-button">Register</button>
-                    <Link to="/contests/contestid/problems">
+                    
+                    <Link to={"/contests/"+this.props.data[id].name+"/questions/"}>
                         <button className="contest-register-button">Start Now</button>
                     </Link>
                 </div>
@@ -35,5 +41,14 @@ const ContestHome = () => {
         </div>
     );
 }
+}
 
-export default ContestHome;
+
+const mapStateToProps = (state) => {
+    return {
+      token: state.auth.token,
+      data: state.contest.contestdata,
+    };
+};
+  
+export default connect(mapStateToProps)(ContestHome);

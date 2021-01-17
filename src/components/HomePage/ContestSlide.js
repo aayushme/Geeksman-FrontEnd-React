@@ -1,19 +1,22 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-const ContestSlide = () => {
+const ContestSlide = (props) => {
   return (
     <div className="contest-slide container-fluid">
       <div className="contest-box-container">
-        <div className="contest-title">Code For YMCA</div>
+        <div className="contest-title">{props.name}</div>
         <span className="contest-subtitle">Week 12</span>
         <div className="contest-timing">
-          Starts At: 11 Dec 1 PM<br />
-          Ends At: 11 Dec 3 PM
+          Starts At: {props.startdate} {props.starttime}<br />
+          Ends At: {props.enddate} {props.endtime}
       </div>
-        <button className="register-button" onClick={() => { window.location.href = 'https://www.google.com' }}>Register</button>
+      <br/>
+        <Link className="register-button" to="/contests">Register</Link>
       </div>
     </div>
   );
 }
+
 
 export default ContestSlide;

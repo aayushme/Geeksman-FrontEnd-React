@@ -1,5 +1,4 @@
 import React from 'react';
-import Problem from '../Problem/Problem';
 import Ace from './../Ace/Ace';
 
 const ContestProblem = () => {
@@ -8,7 +7,6 @@ const ContestProblem = () => {
             <div className="row no-gutters">
                 <div className="col-md-8">
                     <div className="problem">
-                        <Problem />
                         <Ace />
                     </div>
                 </div>

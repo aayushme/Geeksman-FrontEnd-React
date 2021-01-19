@@ -8,9 +8,7 @@ import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 
 class Contests extends Component {
-
-
-    
+   
   DynamicRoutes = (
     
     this.props.data.map((contest, index) => (
@@ -20,7 +18,6 @@ class Contests extends Component {
         </>
     ))
 );
-
 
     render(){
     return (

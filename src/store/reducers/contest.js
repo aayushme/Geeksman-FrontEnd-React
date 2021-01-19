@@ -8,8 +8,8 @@ const initialState = {
       name: `<Hello World/>`,
       starttime: "09:00:00",
       endtime: "21:00:00",
-      startdate: "17/01/2021",
-      enddate: "18/01/2021",
+      startdate: "2021-01-20",
+      enddate: "2021-01-22",
       prize: "Selection in club",
       registeredusers: {
         id: "1",
@@ -27,8 +27,8 @@ const initialState = {
       name: "Auditions 2",
       starttime: "09:00:00",
       endtime: "21:00:00",
-      startdate: "17/01/2021",
-      enddate: "18/01/2021",
+      startdate: "2021-01-20",
+      enddate: "2021-01-22",
       prize: "Selection in club",
       registeredusers: {
         id: "1",
@@ -45,8 +45,8 @@ const initialState = {
       id: "3",
       name: "Auditions3",
       starttime: "09:00:00",
-      endtime: "21:00:00",
-      startdate: "17/01/2021",
+      startdate: "2021-01-20",
+      enddate: "2021-01-22",
       enddate: "18/01/2021",
       prize: "Selection in club",
       registeredusers: {

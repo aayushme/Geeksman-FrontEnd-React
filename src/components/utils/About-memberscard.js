@@ -1,26 +1,31 @@
 import React from 'react'
 import image from '../images/image.jpeg'
 import {Link} from 'react-router-dom'
-function Aboutprofilecard({name,post,batch}) {
+function Aboutprofilecard(props) {
     return (
-        <div className="member-card">
-            <div class="wrapper">
-    <div class="img-area">
-      <div class="inner-area">
-        <img src={image} alt=""/>
+      <div class="card">
+      <div class="banner">
+        <img src={props.image}/>
       </div>
-    </div>
-    <div class="name">{name}</div>
-    <div class="about aboutpost">{post}</div>
-    <div class="batch">Batch:-{batch}</div>
-    <div class="social-icons">
-      <Link href="#" className="fb"><i class="fab fa-facebook-f"></i></Link>
-    <Link href="#" className="github"><i class="fab fa-github"></i></Link>
-      <Link href="#" className="insta"><i class="fab fa-instagram"></i></Link>
+      <div class="menu">
+        
+      </div>
+      <h2 class="name">{props.name}</h2>
+      <div class="title">{props.post}</div>
+      <div className="branch"><span><b>Branch</b>:-3rd Year CE</span></div>
+      <div className="sociallinks">
+      <span><b>Social</b>:-&nbsp;&nbsp;</span>
+      <Link href="#" className="github"><i class="fab fa-github" aria-hidden="true"></i></Link>
+      <Link href="#" className="insta"><i className="fab fa-instagram"></i></Link>
       <Link href="#" className="linkedin"><i class="fab fa-linkedin"></i></Link>
-    </div>
-  </div>
-        </div>
+      </div>
+      <div class="actions">
+         
+      </div>
+     
+  </div>    
+    
+    
     )
 }
 

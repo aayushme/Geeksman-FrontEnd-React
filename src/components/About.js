@@ -1,18 +1,26 @@
 import React from "react";
+import './utils/utils.css'
 import image from "./images/image.jpeg";
 import MemberCard from "./utils/About-memberscard";
 import DevCard from "./utils/Developers-card";
 import Navbar from "./Navbar";
 import Coordinators from "./utils/coordinators"
 import Events from './utils/events'
+import image1 from './images/png/komal bhatia.jpg'
+import image2 from './images/png/neelam.jpeg'
+import eventimage from './images/background.jpg'
 const About = () => {
-  const [activesection, setactivsection] = React.useState("geeksmanfamily");
+
   return (
     <div className="aboutpage">
       <div className="about-navbar-part">
         <Navbar />
       </div>
-      <h1 className="about-heading">About Us</h1>
+      <div className="about__us-head">
+      <h1>About Us</h1>
+      <span>This is our team, a lot of smiling happy people who work hard to empower geeksman.</span>
+      </div>
+     
       <div className="video-text-part">
         <div className="videoarea">
           <iframe
@@ -35,81 +43,60 @@ const About = () => {
           </p>
         </div>
       </div>
-      {/* <div className="about__content-heading">
-          <div className="geeksman-family">
-           <Button id="btndesign" className="btn-secondary" onClick={()=>{setactivsection('geeksmanfamily')}}>Geeksman Family</Button>
-          </div>
-          <div className="developer-section">
-            <Button id="btndesign" onClick={()=>{setactivsection('developersection')}}>Developers</Button>
-          </div>
-        </div> */}
-        <div className="jumbotron">
 
-          <Events/>
-
-      <h1 className="about-heading">Our Events</h1>
-
-      <div className="projects-section">
-        <div className="row">
-          <div className="col-sm-6">
-            <DevCard
-              image={image}
-              name="Aayush Tyagi"
-              stack="FULL STACK DEVELOPER"
-            />{" "}
-          </div>
-          <div className="col-sm-6">
-            <DevCard
-              image={image}
-              name="Aayush Tyagi"
-              stack="FULL STACK DEVELOPER"
-            />{" "}
-          </div>
-          <div className="col-sm-6">
-            <DevCard
-              image={image}
-              name="Aayush Tyagi"
-              stack="FULL STACK DEVELOPER"
-            />{" "}
-          </div>
-          <div className="col-sm-6">
-            <DevCard
-              image={image}
-              name="Aayush Tyagi"
-              stack="FULL STACK DEVELOPER"
-            />{" "}
-          </div>
-        </div>
-      </div>
-
-      <h1 className="about-heading">Faculty Coordinators</h1>
-      <Coordinators/>
-      
-      <h1 className="about-heading">Our Members</h1>
-      <div className="about__content-section">
-        <div className="geeksmanfamily-section">
-          <MemberCard
-            name="Aayush Tyagi"
-            post="Junior Secretary"
-            image={image}
-            batch="3rd Year ECE"
-          />
-          <MemberCard
-            name="Aayush Tyagi"
-            post="Junior Secretary"
-            image={image}
-            batch="3rd Year ECE"
-          />
-          <MemberCard
-            name="Aayush Tyagi"
-            post="Junior Secretary"
-            image={image}
-            batch="3rd Year ECE"
-          />
-        </div>
-      </div>
-      </div>
-      
+       <div className="events__heading">
+         <h1>Our Events</h1>
+       </div>
+       <div className="events__content">
+       <Events image={eventimage}/>
+       <Events image={eventimage}/>
+       <Events image={eventimage}/>
+       <Events image={eventimage}/>
+       </div>
+       <div className="faculty__coordinators">
+         <h1>Faculty Co-ordinators</h1>
+       </div>
+       <div className="faculty__content">
+        <Coordinators image={image2} name="Dr.Neelam Duhan" post="Club Coordinator"/>
+        <Coordinators image={image1} name="Dr.Komal Bhatia" post="Chairman of CE dept."/>
+        
+       </div>
+       <div className="our__members">
+         <h1>Our Members</h1>
+       </div>
+       <div className="our__members-content">
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+        <MemberCard image={image} name="Aayush Tyagi" post="Junior Secretary"/>
+       </div>
+       <div className="developers">
+         <h1>Developers</h1>
+       </div>
+       <div className="developer__content">
+          <DevCard name="Aayush Tyagi" stack="Fullstack Developer" image={image}/>
+          <DevCard name="Parag Thakur" stack="Fullstack Developer" image={image}/>
+          <DevCard name="Shubham Bansal" stack="Backend Developer" image={image}/>
+       </div>
     </div>
   );
 };

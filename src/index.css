@@ -34,14 +34,27 @@
 }
 
 /*----------  fonts  ----------*/
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 /*----------  Global Styles  ----------*/
+
+@font-face {
+  font-family: myFont;
+  src: url(./Roboto-Light.ttf);
+}
+
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Roboto', sans-serif;
+  font-family: myFont !important;
+  
+}
+
+
+@-webkit-keyframes fontfix {
+  from { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 textarea:hover,
@@ -1597,7 +1610,6 @@ margin-bottom: 0px!important;
   font-weight: 600;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&display=swap');
 
 .about-heading{
   font-size: 3rem;

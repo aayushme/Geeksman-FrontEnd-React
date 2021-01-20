@@ -4,6 +4,7 @@ import MemberCard from "./utils/About-memberscard";
 import DevCard from "./utils/Developers-card";
 import Navbar from "./Navbar";
 import Coordinators from "./utils/coordinators"
+import Events from './utils/events'
 const About = () => {
   const [activesection, setactivsection] = React.useState("geeksmanfamily");
   return (
@@ -43,6 +44,8 @@ const About = () => {
           </div>
         </div> */}
         <div className="jumbotron">
+
+          <Events/>
 
       <h1 className="about-heading">Our Events</h1>
 

@@ -89,7 +89,7 @@ class LoginPage extends Component {
           "Please check your email inbox to confirm your email address. If you are unable to find the confirmation email please check your spam folder.",
         modalheader: "Confirm your email address",
       });
-      this.props.reduxSignup(
+      this.props.postUser(
         this.state.name,
         this.state.newemail,
         this.state.newpassword
@@ -245,8 +245,8 @@ const mapDispatchToProps = (dispatch) => {
     reduxLogin: (email, password) => {
       dispatch(actions.reduxLogin(email, password));
     },
-    reduxSignup: (name, newemail, newpassword) => {
-      dispatch(actions.reduxSignup(name, newemail, newpassword));
+    postUser: (name, newemail, newpassword) => {
+      dispatch(actions.postUser(name, newemail, newpassword));
     },
   };
 };

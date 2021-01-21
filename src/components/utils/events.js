@@ -8,16 +8,16 @@ function Events(props){
            <img src={props.image}/>
           </div>
           <div className="event-info">
-           <h2>Event Name</h2>
+           <h2>{props.eventname}</h2>
            <div className="description_event">
                <p>
-                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam eum vel alias! Odit sint, optio architecto quos voluptates ipsa dignissimos accusamus cum, minus incidunt eius suscipit consequuntur totam alias illo.
+                   {props.description}
 
                </p>
            </div>
            <div className="dateandtime">
-               <span><b>Date</b>:-20 jan 2021</span>
-               <span><b>Time</b>:-6-7pm</span>
+               <span><b>Date</b>{props.date}</span>
+               <span><b>Time</b>{props.time}</span>
                <span><b>Venue</b>:-Online</span>
            </div>
            <div className="entryfee">

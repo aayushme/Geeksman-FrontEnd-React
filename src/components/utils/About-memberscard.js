@@ -3,8 +3,8 @@ import image from '../images/image.jpeg'
 import {Link} from 'react-router-dom'
 function Aboutprofilecard(props) {
     return (
-      <div class="card">
-      <div class="banner">
+      <div class="card" >
+      <div class="banner" >
         <img src={props.image}/>
       </div>
       <div class="menu">

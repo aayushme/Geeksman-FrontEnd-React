@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import authReducer from './store/reducers/auth';
 import questionReducer from './store/reducers/questionpage'
 import contestReducer from './store/reducers/contest'
+import userReducer from './store/reducers/users'
 
 
 //Redux Store
@@ -20,7 +21,8 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   auth: authReducer,
   question:questionReducer,
-  contest:contestReducer
+  contest:contestReducer,
+  user:userReducer
 });
 
 const store = createStore(

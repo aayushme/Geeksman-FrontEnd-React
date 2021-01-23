@@ -17,30 +17,78 @@ export const getUserError = (error) => {
 
 
 
-export const getUser = (token) => {
+export const getUser = (userid) => {
   return (dispatch) => {
-    
 
     let axiosConfig = {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
       },
     };
+    console.log(userid)
 
     axios
       .get(
-        process.env.PUBLIC_API_URL+'/rest-auth/login/',
-        axiosConfig
+        process.env.REACT_APP_PUBLIC+'/users/getuser/'+userid,
+        axiosConfig,
+        
       )
       .then((res) => {
         console.log('RESPONSE RECEIVED: ', res);
         
         dispatch(
-          getUserSuccess(res.data)
+          getUserSuccess(res.data.user)
         );
       })
       .catch((err) => {
         dispatch(getUserError(err));
+      });
+  };
+};
+
+/*============GET USERS CONTESTS=======================*/
+export const getUserContestSuccess = (userdata) => {
+  return {
+    type: actionTypes.GET_USER_CONTEST_SUCCESS,
+    usercontestdata:userdata
+  };
+};
+
+export const getUserContestFail = (error) => {
+  return {
+    type: actionTypes.GET_USER_CONTEST_FAIL,
+    error: error,
+  };
+};
+
+
+
+export const getUserContest = (uid) => {
+  return (dispatch) => {
+    
+    let axiosConfig = {
+      headers: {
+        "Cache-Control": "no-cache",
+        "Content-Type": "multipart/form-data"
+      },
+      
+    };
+
+    axios
+      .get(
+        process.env.REACT_APP_PUBLIC+'/getusercontests/'+uid,
+        axiosConfig,
+        
+      )
+      .then((res) => {
+        console.log('USER DATA IS: ', res);
+        
+        dispatch(
+          getUserContestSuccess(res.data)
+        );
+      })
+      .catch((err) => {
+        dispatch(getUserContestFail(err));
       });
   };
 };
@@ -64,82 +112,73 @@ export const postUserSuccess = (poststatus) => {
   
   
   
-  export const postUser = (data) => {
+  export const postUser = (name,email,password) => {
     return (dispatch) => {
       
-  
-      let axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-        },
-      };
-  
-      axios
-        .post(
-          process.env.PUBLIC_API_URL+'/rest-auth/login/',
-          axiosConfig,
-          data
-        )
-        .then((res) => {
-          console.log('RESPONSE RECEIVED: ', res);
+      axios({
+        method: 'post',
+        responseType: 'json',
+        url: `${process.env.REACT_APP_PUBLIC}/signup`,
+        data: {
+          name,
+          email,
+          password
           
-          dispatch(
-            postUserSuccess(res.status)
-          );
-        })
-        .catch((err) => {
-          dispatch(postUserError(err));
-        });
+        }
+      })
+       .then(response => {
+         console.log(response)
+         dispatch(postUserSuccess(response));
+       })
+       .catch(error => {
+       console.log(error)
+       });
     };
   };
-  
 
 
-  
-/*============Verify User===========*/
+/*============Patch Users===========*/
 
-export const verifyUserSuccess = (token,verifystatus) => {
-    return {
-      type: actionTypes.POST_USER_SUCCESS,
-      verifystatus:verifystatus,
-      token:token
-    };
+export const patchUserSuccess = (poststatus) => {
+  return {
+    type: actionTypes.PATCH_USER_SUCCESS,
+    patchStatus:poststatus
   };
-  
-  export const verifyUserError = (error) => {
-    return {
-      type: actionTypes.POST_USER_FAIL,
-      error: error,
-    };
+};
+
+export const patchUserError = (error) => {
+  return {
+    type: actionTypes.PATCH_USER_FAIL,
+    error: error,
   };
-  
-  
-  
-  export const verifyUser = (data) => {
-    return (dispatch) => {
-      
-      let axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-        },
-      };
-  
-      axios
-        .post(
-          process.env.PUBLIC_API_URL+'/rest-auth/login/',
-          axiosConfig,
-          data
-        )
-        .then((res) => {
-          console.log('RESPONSE RECEIVED: ', res);
-          
-          dispatch(
-            verifyUserSuccess(res.status)
-          );
-        })
-        .catch((err) => {
-          dispatch(verifyUserError(err));
-        });
-    };
+};
+
+
+
+export const patchUser = (userid,college,year,branch,phoneno) => {
+  return (dispatch) => {
+    
+    
+    axios({
+      method: 'patch',
+      responseType: 'application/json;charset=UTF-8',
+      url: `${process.env.REACT_APP_PUBLIC}/users/updateuser/${userid}`,
+      data: {
+        college,
+        year,
+        branch,
+        phoneno
+      }
+    })
+     .then(response => {
+       console.log(response)
+       alert("details Updated Successfully")
+       dispatch(postUserSuccess(response.status));
+     })
+     .catch(error => {
+     console.log(error)
+     });
   };
+};
+
   

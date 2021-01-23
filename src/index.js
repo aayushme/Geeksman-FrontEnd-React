@@ -10,6 +10,7 @@ import authReducer from './store/reducers/auth';
 import questionReducer from './store/reducers/questionpage'
 import contestReducer from './store/reducers/contest'
 import userReducer from './store/reducers/users'
+import aboutReducer from './store/reducers/about'
 
 
 //Redux Store
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   question:questionReducer,
   contest:contestReducer,
-  user:userReducer
+  user:userReducer,
+  about:aboutReducer
 });
 
 const store = createStore(

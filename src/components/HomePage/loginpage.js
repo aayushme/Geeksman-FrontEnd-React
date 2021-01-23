@@ -5,7 +5,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Modal from "../utils/modals/modal";
 import { Redirect } from "react-router-dom";
-
+import geeksman from "../images/png/geeksman.png";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -18,13 +18,17 @@ class LoginPage extends Component {
     newemail: "",
     newpassword: "",
     validatenewpassword: "",
-    name: null,
+    name: "",
     success: false,
     alert: "",
     modal: false,
     modalmessage: "",
     modalheader: "",
+    field: "",
   };
+
+ 
+
 
   signInShow = (e) => {
     e.preventDefault();
@@ -33,19 +37,19 @@ class LoginPage extends Component {
 
   signUpShow = (e) => {
     e.preventDefault();
-    this.setState({ activeClass: "container right-panel-active" });
+    this.setState({ activeClass: "container active" });
   };
 
   setLogin = (e) => {
     e.preventDefault();
-    if (this.state.password === "") {
-      this.setState({
-        alert: "Please Enter Password",
-        success: true,
-      });
-    } else if (this.state.email === "") {
+    if (this.state.email === "") {
       this.setState({
         alert: "Please Enter Email",
+        success: true,
+      });
+    } else if (this.state.password === "") {
+      this.setState({
+        alert: "Please Enter Password",
         success: true,
       });
     } else {
@@ -61,16 +65,22 @@ class LoginPage extends Component {
     this.setState({
       modal: true,
       modalmessage:
-        "We have sent an email to you, check your email inbox to reset your password. If you are unable to find the reset email please check your spam folder.",
+        "Please type your emailaddress associated with your account, we will send an email to you, check your email inbox to reset your password. If you are unable to find the reset email please check your spam folder.",
       modalheader: "Reset your password",
+      field: "Type Your Email",
     });
   };
 
+  errorHandle = () =>{
+    this.setState({success:true,alert:"Wrong id/Password"})
+  }
+
   setSignup = (e) => {
+    e.preventDefault();
     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var passwordformat = /^(?=(.*[a-zA-Z]){1,})(?=(.*[0-9]){2,}).{8,}$/;
 
-    if (this.state.name === null) {
+    if (this.state.name === "") {
       this.setState({ alert: "Enter Valid Name", success: true });
       console.log("enter name");
     } else if (!this.state.newemail.match(mailformat)) {
@@ -83,17 +93,19 @@ class LoginPage extends Component {
         success: true,
       });
     } else if (this.state.validatenewpassword === this.state.newpassword) {
+
+      this.props.postUser(
+        this.state.name,
+        this.state.newemail,
+        this.state.newpassword
+      );
+
       this.setState({
         modal: true,
         modalmessage:
           "Please check your email inbox to confirm your email address. If you are unable to find the confirmation email please check your spam folder.",
         modalheader: "Confirm your email address",
       });
-      this.props.postUser(
-        this.state.name,
-        this.state.newemail,
-        this.state.newpassword
-      );
     } else {
       this.setState({ alert: "Password doesnot match", success: true });
     }
@@ -101,140 +113,153 @@ class LoginPage extends Component {
 
   render() {
     let authRedirect = null;
-
     if (this.props.isAuthenticated) {
       authRedirect = <Redirect to="/contests" />;
     }
+    let authRedirect2 = null;
+    if (this.props.forgetstatus === "OK") {
+      authRedirect2 = <Redirect to="/contests" />;
+    }
     
+
+
     return (
       <>
-        <div className={this.state.activeClass} id="container">
-          <div class="form-container sign-up-container">
-            <form action="#" className="login-signup">
-              <h1>Create Account</h1>
-
-              <span>Use your email for registration</span>
-              <input
-                type="text"
-                placeholder="Name"
-                onChange={(e) =>
-                  this.setState({
-                    name: e.target.value,
-                  })
-                }
-                value={this.state.name}
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                onChange={(e) =>
-                  this.setState({
-                    newemail: e.target.value,
-                  })
-                }
-                value={this.state.newemail}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={(e) =>
-                  this.setState({
-                    newpassword: e.target.value,
-                  })
-                }
-                value={this.state.newpassword}
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                onChange={(e) =>
-                  this.setState({
-                    validatenewpassword: e.target.value,
-                  })
-                }
-                value={this.state.validatenewpassword}
-              />
-              <button
-                className="login-button"
-                onClick={(e) => this.setSignup(e)}
-              >
-                Sign Up
-              </button>
-            </form>
-          </div>
-          <div class="form-container sign-in-container">
-            <form className="login-signup" onSubmit={(e) => this.setLogin(e)}>
-              <h1>Sign in</h1>
-              <input
-                type="email"
-                placeholder="Email"
-                onChange={(e) =>
-                  this.setState({
-                    email: e.target.value,
-                  })
-                }
-                value={this.state.email}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={(e) =>
-                  this.setState({
-                    password: e.target.value,
-                  })
-                }
-                value={this.state.password}
-              />
-              <a href="#" onClick={(e) => this.handleForgetPassword(e)}>
-                Forgot your password?
-              </a>
-              <button className="login-button">Sign In</button>
-            </form>
-          </div>
-          <div class="overlay-container">
-            <div class="overlay">
-              <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>
-                  To keep connected with us please login with your personal info
-                </p>
-                <button
-                  class="ghost login-button"
-                  onClick={(e) => this.signInShow(e)}
-                >
-                  Sign In
-                </button>
+        <div className="section">
+          <div class={this.state.activeClass}>
+            <div class="user signinBx">
+              <div class="imgBx">
+                <img src={geeksman} alt="" />
               </div>
-              <div class="overlay-panel overlay-right">
-                <h1>Hello, Geek!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button
-                  class="ghost login-button"
-                  onClick={(e) => this.signUpShow(e)}
-                >
-                  Sign Up
-                </button>
+              <div class="formBx">
+                <form>
+                  <h2>Sign In</h2>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    onChange={(e) =>
+                      this.setState({
+                        email: e.target.value,
+                      })
+                    }
+                    value={this.state.email}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) =>
+                      this.setState({
+                        password: e.target.value,
+                      })
+                    }
+                    value={this.state.password}
+                  />
+                  <input
+                    onClick={(e) => this.setLogin(e)}
+                    type="submit"
+                    name=""
+                    value="Login"
+                  />
+                  <br />
+                  <p class="signup">
+                    <a href="#" onClick={(e) => this.handleForgetPassword(e)}>
+                      Forgot your password?
+                    </a>
+                  </p>
+
+                  <p class="signup">
+                    Don't have an account ?
+                    <a href="#" onClick={(e) => this.signUpShow(e)}>
+                      Sign Up
+                    </a>
+                  </p>
+                </form>
+              </div>
+            </div>
+            <div class="user signupBx">
+              <div class="formBx">
+                <form>
+                  <h2>Create an account</h2>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    onChange={(e) =>
+                      this.setState({
+                        name: e.target.value,
+                      })
+                    }
+                    value={this.state.name}
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    onChange={(e) =>
+                      this.setState({
+                        newemail: e.target.value,
+                      })
+                    }
+                    value={this.state.newemail}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) =>
+                      this.setState({
+                        newpassword: e.target.value,
+                      })
+                    }
+                    value={this.state.newpassword}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    onChange={(e) =>
+                      this.setState({
+                        validatenewpassword: e.target.value,
+                      })
+                    }
+                    value={this.state.validatenewpassword}
+                  />
+                  <input
+                    onClick={(e) => this.setSignup(e)}
+                    type="submit"
+                    name=""
+                    value="Sign Up"
+                  />
+                  <p class="signup">
+                    Already have an account ?
+                    <a href="#" onClick={(e) => this.signInShow(e)}>
+                      Sign In
+                    </a>
+                  </p>
+                </form>
+              </div>
+              <div class="imgBx">
+                <img src={geeksman} alt="" />
               </div>
             </div>
           </div>
-
-          <Snackbar
-            open={this.state.success}
-            autoHideDuration={6000}
-            onClose={this.handleClose}
-          >
-            <Alert onClose={this.handleClose} severity="error">
-              {this.state.alert}
-            </Alert>
-          </Snackbar>
-          <Modal
-            show={this.state.modal}
-            message={this.state.modalmessage}
-            confirm="false"
-            heading={this.state.modalheader}
-          />
-          {authRedirect}
         </div>
+        {authRedirect}
+        {authRedirect2}
+
+        <Snackbar
+          open={this.state.success}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <Alert onClose={this.handleClose} severity="error">
+            {this.state.alert}
+          </Alert>
+        </Snackbar>
+        <Modal
+          show={this.state.modal}
+          message={this.state.modalmessage}
+          confirm="false"
+          heading={this.state.modalheader}
+          field={this.state.field}
+        />
+       
       </>
     );
   }
@@ -245,8 +270,8 @@ const mapDispatchToProps = (dispatch) => {
     reduxLogin: (email, password) => {
       dispatch(actions.reduxLogin(email, password));
     },
-    postUser: (name, newemail, newpassword) => {
-      dispatch(actions.postUser(name, newemail, newpassword));
+    postUser: (name, email, password) => {
+      dispatch(actions.postUser(name, email, password));
     },
   };
 };
@@ -254,7 +279,10 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
-    isAuthenticated: state.auth.token !== null,
+    isAuthenticated: state.auth.token!==null,
+    forgetstatus: state.auth.forgetstatus,
+    error:state.auth.autherror,
+    errorauth:state.auth.autherror!==null
   };
 };
 

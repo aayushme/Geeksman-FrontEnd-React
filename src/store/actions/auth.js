@@ -7,11 +7,11 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (tokenId, full_nameId) => {
+export const authSuccess = (tokenId, userid) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     token: tokenId,
-    name: full_nameId,
+    userid: userid,
   };
 };
 
@@ -22,13 +22,7 @@ export const authFail = (error) => {
   };
 };
 
-export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('full_name');
-  return {
-    type: actionTypes.AUTH_LOGOUT,
-  };
-};
+
 
 export const reduxLogin = (email, password) => {
   return (dispatch) => {
@@ -46,20 +40,21 @@ export const reduxLogin = (email, password) => {
 
     axios
       .post(
-        process.env.PUBLIC_API_URL+'/rest-auth/login/',
+        process.env.REACT_APP_PUBLIC+'/login',
         postData,
         axiosConfig
       )
       .then((res) => {
         console.log('RESPONSE RECEIVED: ', res);
         localStorage.setItem('token', res.data.token);
-        localStorage.setItem('full_name', res.data.full_name);
+        localStorage.setItem('userid', res.data.userid);
         dispatch(
-          authSuccess(res.data.token, res.data.designation, res.data.full_name)
+          authSuccess(res.data.token,res.data.userid)
         );
       })
       .catch((err) => {
         dispatch(authFail(err));
+        alert('Wrong Id/Password')
       });
   };
 };
@@ -67,11 +62,11 @@ export const reduxLogin = (email, password) => {
 export const authCheckStatus = () => {
   return (dispatch) => {
     const token = localStorage.getItem('token');
-    const full_name = localStorage.getItem('full_name');
+    const userid = localStorage.getItem('userid');
     if (!token) {
-      dispatch(logout());
+      dispatch(authFail("Error"));
     } else {
-      dispatch(authSuccess(token, full_name));
+      dispatch(authSuccess(token, userid));
     }
   };
 };
@@ -79,30 +74,27 @@ export const authCheckStatus = () => {
 /*============Redux Signup===========*/
 
 
-export const verifyUserSuccess = (tokenId, full_nameId) => {
+export const changePasswordSuccess = (status) => {
   return {
-    type: actionTypes.AUTH_SUCCESS,
-    token: tokenId,
-    name: full_nameId,
+    type: actionTypes.CHANGE_PWD_SUCCESS,
+    forgetstatus:status
   };
 };
 
-export const verifyUserFail = (tokenId, full_nameId) => {
+export const changePasswordFail = (err) => {
   return {
-    type: actionTypes.AUTH_SUCCESS,
-    token: tokenId,
-    name: full_nameId,
+    type: actionTypes.CHANGE_PWD_FAIL,
+    err:err
   };
 };
 
 
 
-export const changePwd = (user_name, pwd) => {
+export const changePassword = (email) => {
   return (dispatch) => {
     dispatch(authStart());
     var postData = JSON.stringify({
-      username: user_name,
-      password: pwd,
+      email:email
     });
 
     let axiosConfig = {
@@ -113,19 +105,20 @@ export const changePwd = (user_name, pwd) => {
 
     axios
       .post(
-        'https://mis2020.herokuapp.com/rest-auth/login/',
+        process.env.REACT_APP_PUBLIC+"/forgotpassword",
         postData,
         axiosConfig
       )
       .then((res) => {
-        console.log('RESPONSE RECEIVED: ', res);
+        
+        console.log(res.statusText)
         
         dispatch(
-          verifyUserSuccess(res.data.token, res.status)
+          changePasswordSuccess(res.statusText)
         );
       })
       .catch((err) => {
-        dispatch(verifyUserFail(err));
+        dispatch(changePasswordFail(err));
       });
   };
 };

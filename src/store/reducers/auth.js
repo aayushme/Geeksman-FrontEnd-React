@@ -3,12 +3,14 @@ import { updateObject } from '../utility';
 
 const initialState = {
   token: null,
-  userId: null,
+  userid: null,
+  autherror:null,
   error: null,
   name: null,
   designation: null,
   loading: false,
   authRedirectPath: '/',
+  forgetstatus:""
 };
 
 const authStart = (state, action) => {
@@ -19,7 +21,7 @@ const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.token,
     name: action.name,
-    designation: action.designation,
+    userid:action.userid,
     error: null,
     loading: false,
   });
@@ -27,10 +29,24 @@ const authSuccess = (state, action) => {
 
 const authFail = (state, action) => {
   return updateObject(state, {
+    autherror: action.error,
+    loading: false,
+  });
+};
+
+const forgetSuccess = (state, action) => {
+  return updateObject(state, {
+    forgetstatus:action.forgetstatus
+  });
+};
+
+const forgetFail = (state, action) => {
+  return updateObject(state, {
     error: action.error,
     loading: false,
   });
 };
+
 
 const authLogout = (state, action) => {
   return updateObject(state, { token: null, userId: null });
@@ -52,6 +68,10 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action);
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectPath(state, action);
+    case actionTypes.CHANGE_PWD_SUCCESS:
+      return forgetSuccess(state, action);
+    case actionTypes.CHANGE_PWD_FAIL:
+      return forgetFail(state, action);
     default:
       return state;
   }

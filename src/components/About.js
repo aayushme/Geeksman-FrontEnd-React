@@ -9,7 +9,6 @@ import Events from "./utils/events";
 import image1 from "./images/png/komal bhatia.jpg";
 import image2 from "./images/png/neelam.jpeg";
 import bbop from "./images/png/bbop.png";
-import eventimage from "./images/background.jpg";
 import geeky from "./images/png/geekymondays.jpg";
 import machine from "./images/png/machine.jpg";
 import deepdive from "./images/png/deepdive.PNG";
@@ -17,8 +16,19 @@ import codef2 from "./images/png/codefury2.png";
 import codef3 from "./images/png/codefury3.PNG";
 import pecfest from "./images/png/pecfest.PNG";
 import acstreak from "./images/png/acstreak.PNG";
+import Aayush from './images/png/aayush.jpg'
+import Dinesh from './images/png/dinesh.jpg'
+import Vineet from './images/png/vineet.PNG'
+import nitika from './images/png/nitika.PNG'
+import rishabh from './images/png/rishabh.PNG'
+import ritik from './images/png/ritik.PNG'
+import { connect } from "react-redux";
+import * as actions from "../store/actions/index";
 
-const About = () => {
+const About = (props) => {
+  React.useEffect(() => {
+    props.getMember();
+  });
   return (
     <div className="aboutpage">
       <div className="about-navbar-part">
@@ -142,39 +152,42 @@ const About = () => {
       <div className="our__members">
         <h1>Our Leads</h1>
         <div className="faculty__content">
-          <MemberCard
-            image={image}
+          <Coordinators
+            image={Vineet}
             name="Vineet Kaushik"
             post="Secretary"
           />
-          <MemberCard
-            image={image}
+          <Coordinators
+            image={ritik}
             name="Ritik Chauhan"
             post="Secretary"
           />
-          <MemberCard
-            image={image}
+          <Coordinators
+            image={Dinesh}
             name="Dinesh Duhan"
             post="Secretary"
           />
         </div>
+       
         <div className="faculty__content">
-          <MemberCard
-            image={image}
+          <Coordinators
+            image={Aayush}
             name="Aayush Tyagi"
             post="Joint Secretary"
           />
-          <MemberCard
-            image={image}
-            name="Aayush Tyagi"
+          <Coordinators
+            image={nitika}
+            name="Nitika Bansal"
             post="Joint Secretary"
           />
-          <MemberCard
-            image={image}
-            name="Aayush Tyagi"
+          <Coordinators
+            image={rishabh}
+            name="Rishabh Gupta"
             post="Joint Secretary"
           />
         </div>
+        <h1>Our Members</h1>
+        <MemberCard />
       </div>
       {/*<div className="our__members">
         <h1>Our Members</h1>
@@ -212,21 +225,28 @@ const About = () => {
         <DevCard
           name="Aayush Tyagi"
           stack="Fullstack Developer"
-          image={image}
+          image={Aayush}
         />
         <DevCard
           name="Parag Thakur"
           stack="Fullstack Developer"
           image={image}
         />
-        <DevCard
-          name="Shubham Bansal"
-          stack="Backend Developer"
-          image={image}
-        />
+        
       </div>
     </div>
   );
 };
 
-export default About;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getMember: () => {
+      dispatch(actions.getMember());
+    },
+    
+  };
+};
+
+
+
+export default connect(null,mapDispatchToProps)(About);

@@ -1,7 +1,9 @@
-export { reduxLogin, changePwd, logout, authCheckStatus } from "./auth";
+export { reduxLogin, authCheckStatus, changePassword } from "./auth";
 
 export { postQuestions, getQuestions } from "./questionpage";
 
-export { getContest, postContest } from "./contests";
+export { getContest, postContest,registerContest,getContestToken } from "./contests";
 
-export { getUser, postUser, verifyUser } from "./users";
+export { getUser, postUser, getUserContest, patchUser } from "./users";
+
+export {getMember} from './about'

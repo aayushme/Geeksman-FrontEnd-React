@@ -1,35 +1,89 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from "react-router-dom";
+import * as actions from "../../store/actions/index";
+import { connect } from "react-redux";
+import Modal from "../utils/modals/modal";
 
 class ContestCard extends Component {
   state = {
     open: false,
     message: "NULL",
     yesbutton: false,
-    redirect:false
+    redirect: false,
+    redirectto: false,
+    show: false,
+    redirecttouser:false
   };
 
-  handleActiveContest = (e, id) => {
-    localStorage.setItem("activecontest", id);
-    this.setState({redirect:true})
+  handleActiveContest = (e, userid, id, index) => {
+    e.preventDefault();
+
+    if (
+      this.props.userdata.college === null &&
+      this.props.phoneno === null &&
+      this.props.year === null &&
+      this.props.branch
+    ) {
+    } else if (this.props.userdata.name !== null) {
+      this.setState({ show: true });
+    } else {
+      this.props.registerContest(userid, id);
+      this.setState({ redirectto: true });
+
+      if (this.props.userdata) {
+        localStorage.setItem("activecontest", index);
+      }
+    }
   };
 
+  handleRedirect = () => {
+    this.setState({ redirect: true });
+  };
 
-  
+  handleRedirectToUserPanel =(e)=>{
+    e.preventDefault();
+    this.setState({redirecttouser:true})
+  }
 
   render() {
     let authRedirect = null;
 
     if (this.state.redirect) {
-      authRedirect = <Redirect to={"/contests/"+this.props.contestname+"/"} />;
+      authRedirect = (
+        <Redirect to={"/contests/" + this.props.contestname + "/"} />
+      );
+    }
+
+    let authRedirect2 = null;
+
+    if (this.state.redirecttouser) {
+      authRedirect2 = (
+        <Redirect to="/userpanel" />
+      );
+    }
+
+    if (this.state.registeruserdata !== null) {
+      if (this.state.redirectto) {
+        this.handleRedirect();
+      }
     }
 
     return (
       <div className="contest-card">
         {authRedirect}
+        {authRedirect2}
         <div className="contest-card-heading">
-          <Link onClick={(e) => this.handleActiveContest(e, this.props.id)}>
+          <Link
+            onClick={(e) =>
+              this.handleActiveContest(
+                e,
+                this.props.userdata.id,
+                this.props.cid,
+                this.props.id
+              )
+            }
+          >
             {this.props.contestname}
           </Link>
         </div>
@@ -39,24 +93,53 @@ class ContestCard extends Component {
         </div>
         <div className="contest-card-timer">
           <span className="contest-card-timer-prefix">Starts at </span>
-          {(this.props.startdate)}{" "}
+
           <span className="contes-card-time">{this.props.starttime}</span>
         </div>
         <div className="contest-card-timer">
           <span className="contest-card-timer-prefix">Ends at </span>
-          {this.props.enddate}{" "}
           <span className="contes-card-time">{this.props.endtime}</span>
         </div>
-
         <div className="contest-card-register-button">
-          <Link onClick={(e) => this.handleActiveContest(e, this.props.id)}>
+          <Link
+            onClick={(e) =>
+              this.handleActiveContest(
+                e,
+                this.props.userdata.id,
+                this.props.cid,
+                this.props.id
+              )
+            }
+          >
             Register Now
           </Link>
         </div>
-        
+        <Modal
+          show={this.state.show}
+          heading="Error Correction"
+          message="You have to complete your details before registering for any contest"
+          field=""
+          confirm="true"
+          redirect={e=>this.handleRedirectToUserPanel(e)}
+        />
       </div>
     );
   }
 }
 
-export default ContestCard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    registerContest: (userid, contestid) => {
+      dispatch(actions.registerContest(userid, contestid));
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    userdata: state.user.userdata,
+    registeruserdata: state.contest.registeruserdata,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContestCard);

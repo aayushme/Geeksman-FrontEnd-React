@@ -12,40 +12,53 @@ class ContestHome extends Component {
     message: "",
     redirect: false,
     confirm:"false",
-    header:""
+    header:"",
+    contest:[]
   };
+ 
 
-  CompareDate = (e, start, end) => {
+  CompareDate = (e, end) => {
     e.preventDefault();
-    var startdate = Date.parse(start);
+    var startdate = this.props.registeruserdata.registereduser.slot.slottime;
     var enddate = Date.parse(end);
     var nowdate = new Date();
 
-    if (startdate < nowdate || enddate > nowdate) {
-      this.setState({ open: true, message: "The contest is not active. Either, it has not started or you have passed the contest date", header:"Message!" });
+    if(this.props.registeruserdata.message==="you are already registered."){
+      if(this.props.registeruserdata.registereduser.slot.slottime){
+        if (startdate > nowdate && nowdate<enddate) {
+          this.setState({ open: true, message: "The contest is not active. Either the Contest has not started or its not your slot, please wait for your time slot or the contest to start.", header:"Message!" });
+        }
+        else if(enddate < nowdate && nowdate>startdate){
+          this.setState({ open: true, message: "The contest is not active. Either the Contest has ended or you have missed your slot, please contact admin if it's a mistake.", header:"Message!" });
+        }
+        else{
+            this.setState({
+                open:true,
+                header:"Confirm Message!",
+                message:"Are you sure you want to start the contest. After clicking this you won't be able to backoff",
+                confirm:true
+            })
+        }
+      }
     }
-    else{
-        this.setState({
-            open:true,
-            header:"Confirm Message!",
-            message:"Are you sure you want to start the contest. After clicking this you won't be able to backoff",
-            confirm:true
-        })
-    }
+    
   };
+
 
   onRedirect = (e) => {
       e.preventDefault();
+      this.props.getContestToken(this.props.registeruserdata._id,this.props.registeruserdata.ContestId);
       this.setState({redirect:true})
   };
 
   render() {
-    var id = JSON.parse(localStorage.getItem("activecontest")) - 1;
     let authRedirect = null;
+
+    var id=(localStorage.getItem("activecontest"));
 
     if (this.state.redirect) {
       authRedirect = (
-        <Redirect to={"/contests/" + this.props.data[id].name + "/questions"} />
+        <Redirect to={"/contests/" + this.props.data[id].Contestname + "/questions"} />
       );
     }
 
@@ -54,10 +67,9 @@ class ContestHome extends Component {
         <ContestHeader content="Contests" />
         <div className="row">
           <div className="col-md-7">
-            <div className="contest-name">{this.props.data[id].name}</div>
+            <div className="contest-name">{this.props.data[id].Contestname}</div>
             <div className="contest-remaining-time">
-              The contest will start at {this.props.data[id].starttime} on{" "}
-              {this.props.data[id].startdate}
+              The contest will start at {this.props.data[id].starttime}{" "}
             </div>
             <div className="contest-instructions-container">
               <div className="contest-instructions-heading">Instructions</div>
@@ -68,15 +80,8 @@ class ContestHome extends Component {
           </div>
           <div className="col-md-5">
             <button
-              onClick={(e) =>
-                this.CompareDate(
-                  e,
-                  this.props.data[id].startdate,
-                  this.props.data[id].starttime,
-                  this.props.data[id].enddate,
-                  this.props.data[id].endtime
-                )
-              }
+            onClick={e=>this.CompareDate(e)}
+              
               className="contest-register-button"
             >
               Start Now
@@ -96,11 +101,21 @@ class ContestHome extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getContestToken: (uid,cid) => {
+      dispatch(actions.getContestToken(uid,cid));
+    },
+    
+  };
+};
+
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     data: state.contest.contestdata,
+    registeruserdata:state.contest.registeruserdata
   };
 };
 
-export default connect(mapStateToProps)(ContestHome);
+export default connect(mapStateToProps,mapDispatchToProps)(ContestHome);

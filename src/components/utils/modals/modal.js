@@ -1,17 +1,26 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import TextField from '@material-ui/core/TextField';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import * as actions from "../../../store/actions/index";
+import { connect } from "react-redux";
 
-export default function Modal(props) {
+function Modal(props) {
   const [open, setOpen] = React.useState(true);
+  const [email,setEmail] = React.useState("");
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.preventDefault();
+    if(props.field!==""){
+      props.changePassword(email);
+    }
     setOpen(false);
   };
+
 
   return (
     <div>
@@ -26,10 +35,21 @@ export default function Modal(props) {
           <DialogContentText id="alert-dialog-description">
             {props.message}
           </DialogContentText>
+          {(props.field!=="")?<TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label={props.field}
+            type="email"
+            value={email}
+            onChange={e=>setEmail(e.target.value)}
+            fullWidth
+          />:<></>}
+          
         </DialogContent>
         <DialogActions>
           {props.confirm === "false" ? (
-            <Button onClick={handleClose} color="primary" autoFocus>
+            <Button onClick={e=>handleClose(e)} color="primary" autoFocus>
               Agree
             </Button>
           ) : (
@@ -47,3 +67,16 @@ export default function Modal(props) {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changePassword: (email) => {
+      dispatch(actions.changePassword(email));
+    },
+    postUser: (name, newemail, newpassword) => {
+      dispatch(actions.postUser(name, newemail, newpassword));
+    },
+  };
+};
+
+export default connect(null,mapDispatchToProps)(Modal);

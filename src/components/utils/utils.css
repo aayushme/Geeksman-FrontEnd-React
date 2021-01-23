@@ -21,10 +21,17 @@
   transition: all 0.3s ease-out 0s;
   font-weight: 400;
 }
+
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .single-features .features-title-icon .features-title a {
     font-size: 24px;
     line-height: 35px;
+  }
+  .video-text-part {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    height: 100vh;
+    margin-top: -15rem;
   }
 }
 @media (max-width: 767px) {
@@ -32,13 +39,35 @@
     font-size: 24px;
     line-height: 35px;
   }
+  .video-text-part {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    height: 100vh;
+    margin-top: -15rem;
+  }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .single-features .features-title-icon .features-title a {
     font-size: 36px;
     line-height: 45px;
   }
+  .video-text-part {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    height: 100vh;
+    margin-top: -15rem;
+  }
 }
+@media only screen and (max-width: 500px) {
+  
+  .video-text-part {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    height: 90vh !important;
+    margin-top: -15rem !important;
+  }
+}
+
 .single-features .features-title-icon .features-title a:hover {
   color: #0067f4;
 }
@@ -162,8 +191,8 @@
 .video-text-part {
   background-image: url("../images/background.jpg");
   background-size: cover;
-  height: 100vh;
-  margin-top: -15.7rem;
+  height: 90vh;
+  margin-top: -11.4rem;
 }
 .textpart p {
   color: rgb(204, 204, 204);

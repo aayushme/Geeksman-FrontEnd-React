@@ -20,13 +20,14 @@ class ContestsHome extends Component {
       this.props.data.map((contest, index) => (
         <div class={this.classes.cards}>
         <ContestCard
-          contestname={contest.name}
+          contestname={contest.Contestname}
           starttime={contest.starttime}
           smalldescription={contest.contestdetails}
           startdate={contest.startdate}
           enddate={contest.enddate}
           endtime={contest.endtime}
-          id={contest.id}
+          id={index}
+          cid={contest.id}
         />
         </div>
       ))
@@ -41,35 +42,6 @@ class ContestsHome extends Component {
             <div className="contests-section-heading">Live Contests</div>
             <div className="row no-gutters">
               {this.cards}
-            </div>
-            
-          </div>
-          <div className="col-lg-4">
-            <div className="contests-section-heading">Our Top Performers</div>
-            <div className="contests-top-performers-container">
-              <div className="contests-top-performer">
-                <img
-                  src="/images/svg/gold-medal.svg"
-                  alt="gold"
-                  className="contests-medal-img"
-                />
-                <div className="contests-top-performer-name">Aayush Tyagi</div>
-              </div>
-              <div className="contests-top-performer">
-                <img
-                  src="/images/svg/silver-medal.svg"
-                  alt="silver"
-                  className="contests-medal-img"
-                />
-                <div className="contests-top-performer-name">Shubham Bansal</div>
-                <div className="contests-top-performer"></div>
-                <img
-                  src="/images/svg/bronze-medal.svg"
-                  alt="bronze"
-                  className="contests-medal-img"
-                />
-                <div className="contests-top-performer-name">Parag Thakur</div>
-              </div>
             </div>
           </div>
         </div>

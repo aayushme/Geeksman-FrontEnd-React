@@ -8,13 +8,17 @@ import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 
 class Contests extends Component {
+
+  componentDidMount(){
+    this.props.getUserContest(this.props.userid)
+  }
    
   DynamicRoutes = (
     
     this.props.data.map((contest, index) => (
         <>
-        <Route exact path={"/contests/"+contest.name+"/"} component={ContestHome} />
-        <Route exact path={"/contests/"+contest.name+"/questions/"} component={ContestProblem} />
+        <Route exact path={"/contests/"+contest.Contestname+"/"} component={ContestHome} />
+        <Route exact path={"/contests/"+contest.Contestname+"/questions/"} component={ContestProblem} />
         </>
     ))
 );
@@ -40,6 +44,10 @@ const mapDispatchToProps = (dispatch) => {
       postQuestions: (token, data) => {
         dispatch(actions.postQuestions(token, data));
       },
+      getUserContest: (uid) => {
+        dispatch(actions.getUserContest(uid));
+      },
+
     };
   };
   
@@ -47,6 +55,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
       token: state.auth.token,
       data: state.contest.contestdata,
+      userid:state.auth.userid
     };
   };
 

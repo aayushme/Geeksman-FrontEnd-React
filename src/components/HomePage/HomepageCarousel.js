@@ -7,6 +7,7 @@ import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 
 class HomepageCarousel extends Component {
+  
   render() {
     return (
       <div className="homepage-carousel-container">
@@ -20,14 +21,12 @@ class HomepageCarousel extends Component {
           autoplayTimeout={400000}
         >
           <div className="item">
-            <LoginSlide />
+            <LoginSlide authenticated={this.props.isAuthenticated} />
           </div>
           <div className="item">
             <ContestSlide
-              name={this.props.data[0].name}
-              startdate={this.props.data[0].startdate}
+              name={this.props.data[0].Contestname}
               starttime={this.props.data[0].starttime}
-              enddate={this.props.data[0].enddate}
               endtime={this.props.data[0].endtime}
             />
           </div>
@@ -40,19 +39,15 @@ class HomepageCarousel extends Component {
     );
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getContest: (token) => {
-      dispatch(actions.getContest(token));
-    },
-  };
-};
+
 
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    isAuthenticated :state.auth.token!==null,
     data: state.contest.contestdata,
+    userid:state.auth.userid
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomepageCarousel);
+export default connect(mapStateToProps)(HomepageCarousel);

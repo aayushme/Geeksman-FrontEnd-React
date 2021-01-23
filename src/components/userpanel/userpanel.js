@@ -1,12 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -19,6 +17,12 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Participation from "./Participation";
+import * as actions from "../../store/actions/index";
+import TextField from "@material-ui/core/TextField";
+import { connect } from "react-redux";
+import Modal from '../utils/modals/modal'
+import {Redirect} from 'react-router-dom'
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -59,27 +63,22 @@ function UserPanel(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [contests, setcontests] = React.useState([
-    {
-      contestname: "Code Fury",
-      rank: "4/50",
-      points: "400/500",
-    },
-    {
-      contestname: "Code Kedan",
-      rank: "4/50",
-      points: "100/500",
-    },
-    {
-      contestname: "Audition round",
-      rank: "5/50",
-      points: "300/500",
-    },
-  ]);
+  const [college, setCollege] = React.useState("");
+  const [year, setYear] = React.useState("");
+  const [phoneno, setPhoneno] = React.useState("");
+  const [branch, setBranch] = React.useState("");
+  const [image, setImage] = React.useState("");
+  const [redirect,setRedirect] =React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   const [selectedbtn, setselectedbtn] = React.useState("homebtn");
+
+  const handlePatch=(e)=>{
+    e.preventDefault();
+    props.patchUser(props.userid,college,year,branch,phoneno)
+
+  }
   const drawer = (
     <div>
       <div className={classes.toolbar} />
@@ -95,7 +94,7 @@ function UserPanel(props) {
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          <ListItemText primary="Details" />
         </ListItem>
         <Divider />
         <ListItem
@@ -110,6 +109,17 @@ function UserPanel(props) {
           </ListItemIcon>
           <ListItemText primary="UpdateProfile" />
         </ListItem>
+        <ListItem
+          button
+          onClick={() => {
+            setRedirect(true);
+          }}
+        >
+          <ListItemIcon>
+            <ProfileIcon />
+          </ListItemIcon>
+          <ListItemText primary="Return To Home" />
+        </ListItem>
       </List>
     </div>
   );
@@ -117,8 +127,17 @@ function UserPanel(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+    let authRedirect2 = null;
+
+    if (redirect) {
+      authRedirect2 = (
+        <Redirect to="/" />
+      );
+    }
+
   return (
     <div className={classes.root}>
+      {authRedirect2}
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
@@ -133,7 +152,7 @@ function UserPanel(props) {
           </IconButton>
           <Typography variant="h6" noWrap className="headinginfo">
             <h5>Welcome,</h5>
-            Parag Thakur
+            {props.userdata.name}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -175,29 +194,21 @@ function UserPanel(props) {
             <div className="aboutuser">
               <div className="userinfo">
                 <div className="userimagebox">
-                  <Avatar className="styleimage"></Avatar>
+                  <Avatar className="styleimage">
+                    <img src={props.userdata.image} />
+                  </Avatar>
                 </div>
                 <div className="userinfobox">
                   <div className="nameinfo">
-                    <h3>Parag Thakur</h3>
+                    <h3>{props.userdata.name}</h3>
                   </div>
                   <div className="collegeinfo">
-                    <span>
-                      Studying at YMCA University of Science and Technology -
-                      Faridabad
-                    </span>
+                    <span>Studying at {props.userdata.college}</span>
                   </div>
-                  <div className="skillsinfo">
-                    <h4>
-                      Skills: <span>C++,Python</span>
-                    </h4>
-                  </div>
+
                   <div className="educationinfo">
                     <h4>
-                      Education:{" "}
-                      <span>
-                        YMCA University of Science and Technology - Faridabad
-                      </span>
+                      Education: <span>{props.userdata.college}</span>
                     </h4>
                   </div>
                 </div>
@@ -207,18 +218,15 @@ function UserPanel(props) {
                   <h2 className="participationheadingstyle">Participation:</h2>
                 </div>
                 <div className="contestinfocards">
-                  {(contests.length ===0)
-                    &&(
-                      <h3>
-                        You haven't participated in any contest uptil now!!
-                      </h3>
-                    )}
-                  {contests.length != 0 &&
-                    contests.map((contest) => (
+                  {props.usercontests === null && (
+                    <h3>You haven't participated in any contest uptil now!!</h3>
+                  )}
+                  {props.usercontestdata !== null &&
+                    props.usercontestdata.map((contest) => (
                       <Participation
                         contestname={contest.contestname}
-                        rank={contest.rank}
-                        marks={contest.points}
+                        rank="null"
+                        marks={contest.marks}
                       />
                     ))}
                 </div>
@@ -231,14 +239,123 @@ function UserPanel(props) {
                 <h1>Update Profile</h1>
               </div>
               <div className="updateform">
+              <TextField
+                  id="standard-full-width"
+                  label="Name"
+                  style={{ margin: 8 }}
+                  placeholder="Name"
+                  fullWidth
+                  disabled
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={props.userdata.name}
+                  
+                />
+                <TextField
+                  id="standard-full-width"
+                  label="Email"
+                  style={{ margin: 8 }}
+                  placeholder="Email"
+                  fullWidth
+                  disabled
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={props.userdata.email}
+                />
                 
+                <TextField
+                  id="standard-full-width"
+                  label="College"
+                  style={{ margin: 8 }}
+                  placeholder="College"
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={college}
+                  onChange={(e) => setCollege(e.target.value)}
+                />
+                <TextField
+                  id="standard-full-width"
+                  label="Year"
+                  style={{ margin: 8 }}
+                  placeholder="Year"
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                />
+                <TextField
+                  id="standard-full-width"
+                  label="Branch"
+                  style={{ margin: 8 }}
+                  placeholder="Branch"
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={branch}
+                  onChange={(e) => setBranch(e.target.value)}
+                />
+                <TextField
+                  id="standard-full-width"
+                  label="Phone No (Whatsapp)"
+                  style={{ margin: 8 }}
+                  placeholder="Phone No (Whatsapp)"
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={phoneno}
+                  onChange={(e) => setPhoneno(e.target.value)}
+                />
+                <button className="login-button" onClick={e=>handlePatch(e)}>Submit</button>
               </div>
+              
             </div>
           )}
+
+          {props.patchStatus!==null?<Modal show="true" message="Details Updated Successfully" header="Success!" confirm="false" />:<></>}
+          
         </Typography>
       </main>
     </div>
   );
 }
 
-export default UserPanel;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getQuestions: (token) => {
+      dispatch(actions.getQuestions(token));
+    },
+    postQuestions: (token, data) => {
+      dispatch(actions.postQuestions(token, data));
+    },
+    patchUser:(uid,clg,yr,br,phone) =>{
+      dispatch(actions.patchUser(uid,clg,yr,br,phone))
+    }
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    isAuthenticated: state.auth.token != null,
+    userdata: state.user.userdata,
+    usercontestdata: state.user.usercontestdata,
+    userid:state.auth.userid,
+    patchStatus:state.user.patchStatus
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);

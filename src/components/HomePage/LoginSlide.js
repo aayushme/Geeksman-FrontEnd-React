@@ -21,12 +21,15 @@ class LoginSlide extends Component {
             Practice coding, prepare for contests, and win challenges.
           </div>
           <div className="login-buttons">
-            <Link className="login-button" to="/login">
+            {this.props.authenticated?<Link className="login-button" to="/contests">
+              Contests
+            </Link> :<> <Link className="login-button" to="/login">
               Login
             </Link>
             <Link className="login-button" to="/login">
               SignUp
-            </Link>
+            </Link></>}
+           
           </div>
         </div>
       </>

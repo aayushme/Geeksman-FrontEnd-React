@@ -10,7 +10,7 @@ const ContestSlide = (props) => {
         <div className="contest-timing">
           Starts At: {props.startdate} {props.starttime}<br />
           Ends At: {props.enddate} {props.endtime}
-      </div>
+        </div>
       <br/>
         <Link className="register-button" to="/contests">Register</Link>
       </div>

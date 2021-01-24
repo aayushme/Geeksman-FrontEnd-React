@@ -22,8 +22,11 @@ import DoneIcon from "@material-ui/icons/Done";
 import Button from "@material-ui/core/Button";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
+import aayush from "../images/png/aayush.jpg";
+import Modal from '../utils/modals/modal'
+import {Redirect} from 'react-router-dom'
 
-const drawerWidth = 240;
+const drawerWidth = 290;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(0),
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
@@ -54,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(0),
   },
 }));
 
@@ -73,9 +76,24 @@ function ResponsiveDrawer(props) {
   );
   const [value, setValue] = React.useState(activequestion.options.opt1.value);
   const [savedindex, setSavedindex] = React.useState(null);
-  const [hour,setHour] = React.useState(-1);
-  const [minutes,setMinutes] = React.useState(-1);
-  const [seconds,setSeconds] = React.useState(-1);
+  const [hour, setHour] = React.useState(-1);
+  const [minutes, setMinutes] = React.useState(-1);
+  const [seconds, setSeconds] = React.useState(-1);
+  const [show,setShow]=React.useState(false);
+  const [redirect,setRedirect] = React.useState(false)
+
+  const handleTestEnd=()=>{
+    setRedirect(true);
+  }
+
+  let authRedirect = null;
+
+  if (redirect) {
+      authRedirect = (
+        <Redirect to="/" />
+      );
+  }
+
 
   //Mobile Screen
   const handleDrawerToggle = () => {
@@ -84,7 +102,6 @@ function ResponsiveDrawer(props) {
 
   //get Questions
   useEffect(() => {
-    
     var countDownDate = new Date("Sep 25, 2025 11:37:00").getTime();
 
     // Update the count down every 1 second
@@ -105,22 +122,20 @@ function ResponsiveDrawer(props) {
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
       setSeconds(seconds);
       // Output the result in an element with id="demo"
-      
+
       // If the count down is over, write some text
-      if(hours===0 && seconds===0 && minutes===0){
+      if (hours === 0 && seconds === 0 && minutes === 0) {
         clearInterval(x);
         handlePostQuestions();
         console.log("done");
       }
-      
     }, 1000);
-    
   }, []);
 
   //Submit Button
   const handlePostQuestions = () => {
-    console.log("posted")
     props.postQuestions(props.token, localStorage.getItem(["submissions"]));
+    setShow(true);
   };
 
   //Load Selection of Radio Buttons
@@ -213,6 +228,9 @@ function ResponsiveDrawer(props) {
   var drawer = (
     <div>
       <div className={classes.toolbar} />
+      <ListItem>
+        <ListItemText primary="Demo Test" secondary={Date()} />
+      </ListItem>
       <Divider />
       <List>
         {props.questiondata.map((questions, index) => (
@@ -250,7 +268,6 @@ function ResponsiveDrawer(props) {
 
   //Timer
 
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -271,23 +288,40 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap>
             <div className="questionpageheader">
               <div className="timeinfo">
-                <span>{hour}hr {minutes}min {seconds}sec</span>
+                <span>
+                  {hour}hr {minutes}min {seconds}sec
+                </span>
               </div>
 
-              <div className="prevnextbtn">
-                <Button color="danger" onClick={(e) => handlePrev(e)}>
-                  &larr; prev
-                </Button>
-                <Button color="danger" onClick={(e) => handleNext(e)}>
-                  next &rarr;
-                </Button>
+              <div className="row prevnextbtn">
+                <div className="col-sm-4 prev-button">
+                  <Button
+                    color="danger"
+                    variant="contained"
+                    onClick={(e) => handlePrev(e)}
+                  >
+                    &larr; prev
+                  </Button>
+                </div>
+                <div className="col-sm-4 next-button">
+                  <Button
+                    variant="contained"
+                    color="danger"
+                    onClick={(e) => handleNext(e)}
+                  >
+                    next &rarr;
+                  </Button>
+                </div>
+                <div className="col-sm-4 next-button">
                 <Button
                   variant="contained"
                   color="secondary"
                   onClick={(e) => handlePostQuestions(e)}
+                  className="submit-button"
                 >
                   Submit
                 </Button>
+                </div>
               </div>
             </div>
           </Typography>
@@ -361,24 +395,32 @@ function ResponsiveDrawer(props) {
                   label={activequestion.options.opt4.option}
                 />
               </RadioGroup>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={(e) => createArrayQuestions(e)}
-              >
-                Save
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={(e) => removeArrayQuestions(e)}
-              >
-                Clear
-              </Button>
+              <br />
+              <br />
+              <div className="row">
+                <div className="col-sm-5">
+                  <button
+                    onClick={(e) => createArrayQuestions(e)}
+                    className="login-button"
+                  >
+                    Save
+                  </button>
+                </div>
+                <div className="col-sm-5">
+                  <button
+                    onClick={(e) => removeArrayQuestions(e)}
+                    className="login-button"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </div>
             </FormControl>
           </div>
         </Typography>
       </main>
+      {authRedirect}
+      <Modal show={show} message="Are you sure you want to end the test?" header="Caution!" field="" confirm="true" redirect={e=>handleTestEnd()} />
     </div>
   );
 }
@@ -398,7 +440,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     questiondata: state.question.questionsdata,
-    contesttoken:state.contest.contesttoken
+    contesttoken: state.contest.contesttoken,
   };
 };
 

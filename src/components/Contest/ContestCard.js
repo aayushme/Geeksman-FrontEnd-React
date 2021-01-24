@@ -20,14 +20,13 @@ class ContestCard extends Component {
     e.preventDefault();
 
     if (
-      this.props.userdata.college === null &&
-      this.props.phoneno === null &&
-      this.props.year === null &&
-      this.props.branch
+      this.props.userdata.college === null ||
+      this.props.userdata.phoneno === null ||
+      this.props.userdata.year === null ||
+      this.props.userdata.Branch === null
     ) {
-    } else if (this.props.userdata.name !== null) {
       this.setState({ show: true });
-    } else {
+    }  else {
       this.props.registerContest(userid, id);
       this.setState({ redirectto: true });
 

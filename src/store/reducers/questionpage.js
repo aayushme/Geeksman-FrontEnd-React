@@ -9,132 +9,132 @@ const initialState = {
   postloading: false,
   questionsdata:[{
     id: "1",
-    question: "what ifadsfasdfadsfads",
+    question: "What is the name of capital of India?",
     options: {
       opt1: {
-        option:"are you ok1",
+        option:"New Delhi",
         value:"1"
       },
       opt2: {
-        option:"are you ok2",
+        option:"Chennai",
         value:"2"
       },
       opt3: {
-        option:"are you ok3",
+        option:"Faridabad",
         value:"3"
       },
       opt4: {
-        option:"are you ok4",
+        option:"Manali",
         value:"4"
       },
     },
   },
   {
     id: "2",
-    question: "what is Geeksman",
+    question: "what is Geeksman?",
     options: {
       opt1: {
-        option:"are you ok1",
+        option:"Coding Society",
         value:"1"
       },
       opt2: {
-        option:"are you ok2",
+        option:"Dance Society",
         value:"2"
       },
       opt3: {
-        option:"are you ok3",
+        option:"Music Society",
         value:"3"
       },
       opt4: {
-        option:"are you ok4",
+        option:"Drama Society",
         value:"4"
       },
     },
   },
   {
     id: "3",
-    question: "what is manan",
+    question: "what is full form of WHO?",
     options: {
       opt1: {
-        option:"are you ok1",
+        option:"World Health Organisation",
         value:"1"
       },
       opt2: {
-        option:"are you ok2",
+        option:"World Health Organisation",
         value:"2"
       },
       opt3: {
-        option:"are you ok3",
+        option:"World Health Organisation",
         value:"3"
       },
       opt4: {
-        option:"are you ok4",
+        option:"World Health Organisation",
         value:"4"
       },
     },
   },
   {
     id: "4",
-    question: "what is audition",
+    question: "What is past form of verb of seen",
     options: {
       opt1: {
-        option:"are you ok1",
+        option:"saw",
         value:"1"
       },
       opt2: {
-        option:"are you ok2",
+        option:"seen",
         value:"2"
       },
       opt3: {
-        option:"are you ok3",
+        option:"sawed",
         value:"3"
       },
       opt4: {
-        option:"are you ok4",
+        option:"seein",
         value:"4"
       },
     },
   },
   {
     id: "5",
-    question: "what is geek",
+    question: "what is geek?",
     options: {
       opt1: {
-        option:"are you ok1",
+        option:"Person",
         value:"1"
       },
       opt2: {
-        option:"are you ok2",
+        option:"Computer",
         value:"2"
       },
       opt3: {
-        option:"are you ok3",
+        option:"Intelligent Person",
         value:"3"
       },
       opt4: {
-        option:"are you ok4",
+        option:"Weak Person",
         value:"4"
       },
     },
   },
   {
     id: "6",
-    question: "what is shubham",
+    question: "What is capital of USA?",
     options: {
       opt1: {
-        option:"are you ok1",
+        option:"Washington DC",
         value:"1"
       },
       opt2: {
-        option:"are you ok2",
+        option:"New York",
         value:"2"
       },
       opt3: {
-        option:"are you ok3",
+        option:"Hawai",
         value:"3"
       },
       opt4: {
-        option:"are you ok4",
+        option:"California",
         value:"4"
       },
     },

@@ -19,6 +19,7 @@
 * About Page
 * Events Cards
 * Coordinators
+* QuestionPanel
 
 =============================================*/
 
@@ -194,7 +195,6 @@ a:hover {
 
 /*------------Login Page-------------*/
 
-
 .section {
   position: relative;
   min-height: 100vh;
@@ -280,7 +280,7 @@ a:hover {
   font-weight: 300;
 }
 
-.section .container .user .formBx form input[type='submit'] {
+.section .container .user .formBx form input[type="submit"] {
   max-width: 100px;
   background: #677eff;
   color: #fff;
@@ -360,7 +360,6 @@ a:hover {
     width: 100%;
   }
 }
-
 
 /*----------  Top Performers slid  ----------*/
 .top-performers-content-container {
@@ -1665,3 +1664,7 @@ nav {
   align-items: center;
   flex-flow: wrap;
 }
+
+/*=====================Question Panel=================*/
+
+

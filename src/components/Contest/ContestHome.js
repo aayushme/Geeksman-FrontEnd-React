@@ -19,12 +19,12 @@ class ContestHome extends Component {
 
   CompareDate = (e, end) => {
     e.preventDefault();
-    var startdate = this.props.registeruserdata.registereduser.slot.slottime;
+    var startdate = Date.parse(end)
     var enddate = Date.parse(end);
     var nowdate = new Date();
 
     if(this.props.registeruserdata.message==="you are already registered."){
-      if(this.props.registeruserdata.registereduser.slot.slottime){
+      
         if (startdate > nowdate && nowdate<enddate) {
           this.setState({ open: true, message: "The contest is not active. Either the Contest has not started or its not your slot, please wait for your time slot or the contest to start.", header:"Message!" });
         }
@@ -36,10 +36,11 @@ class ContestHome extends Component {
                 open:true,
                 header:"Confirm Message!",
                 message:"Are you sure you want to start the contest. After clicking this you won't be able to backoff",
-                confirm:true
+                confirm:true,
+                
             })
         }
-      }
+      
     }
     
   };
@@ -94,6 +95,7 @@ class ContestHome extends Component {
           redirect={e=>this.onRedirect(e)}
           confirm={this.state.confirm}
           heading={this.state.header}
+          field=""
         />
         {authRedirect}
       </div>

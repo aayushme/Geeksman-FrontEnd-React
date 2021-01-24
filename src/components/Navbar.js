@@ -26,7 +26,7 @@ const Navbar = (props) => {
       <div className="container-fluid">
         <Link className="navbar-logo navbar-brand" to="/">
           <img alt="svgImg" width="48px" src={Geeksman} />
-          GeeksCode
+          GeeksMan
         </Link>
         <button
           className="navbar-toggler"

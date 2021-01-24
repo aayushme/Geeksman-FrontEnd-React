@@ -155,7 +155,7 @@ export const patchUserError = (error) => {
 
 
 
-export const patchUser = (userid,college,year,branch,phoneno) => {
+export const patchUser = (userid,college,year,Branch,phoneno) => {
   return (dispatch) => {
     
     
@@ -166,7 +166,7 @@ export const patchUser = (userid,college,year,branch,phoneno) => {
       data: {
         college,
         year,
-        branch,
+        Branch,
         phoneno
       }
     })
@@ -174,9 +174,12 @@ export const patchUser = (userid,college,year,branch,phoneno) => {
        console.log(response)
        alert("details Updated Successfully")
        dispatch(postUserSuccess(response.status));
+       window.location.reload()
      })
      .catch(error => {
      console.log(error)
+    
+
      });
   };
 };

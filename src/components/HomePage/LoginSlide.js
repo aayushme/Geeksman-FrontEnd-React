@@ -16,7 +16,7 @@ class LoginSlide extends Component {
           <div className="login-slide-text-content">
             <h1>Geeksman - The Coding Society</h1>
             <br />
-            Join the <strong>Coding Society</strong> of CE Department of JCBOSE UST{" "}
+            Join the <strong>Coding Society</strong> of Computer Engineering Department<br/> of JCBOSE UST, YMCA{" "}
             <br />
             Practice coding, prepare for contests, and win challenges.
           </div>

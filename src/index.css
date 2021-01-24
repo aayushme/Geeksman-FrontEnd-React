@@ -1668,3 +1668,21 @@ nav {
 /*=====================Question Panel=================*/
 
 
+@media only screen and (max-width: 600px) {
+  .hidden{
+    display:none
+  }
+  .hiddenpc{
+    display: inline !important;
+  }
+  
+  .column50{
+    align-items: left;
+    width: 50%;
+  }
+}
+
+.hiddenpc{
+  display: none;
+}
+

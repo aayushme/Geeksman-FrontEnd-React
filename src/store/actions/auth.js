@@ -45,7 +45,7 @@ export const reduxLogin = (email, password) => {
         axiosConfig
       )
       .then((res) => {
-        console.log('RESPONSE RECEIVED: ', res);
+        
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('userid', res.data.userid);
         dispatch(
@@ -110,8 +110,6 @@ export const changePassword = (email) => {
         axiosConfig
       )
       .then((res) => {
-        
-        console.log(res.statusText)
         
         dispatch(
           changePasswordSuccess(res.statusText)

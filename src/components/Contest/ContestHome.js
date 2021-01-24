@@ -17,27 +17,29 @@ class ContestHome extends Component {
   };
  
 
-  CompareDate = (e, end) => {
+  CompareDate = (e, start,end) => {
     e.preventDefault();
-    var startdate = Date.parse(end)
-    var enddate = Date.parse(end);
-    var nowdate = new Date();
+    console.log(this.props.data)
+    let startdate = new Date(start)
+    let enddate = new Date(end)
+    let nowdate = new Date();
+    console.log(startdate)
 
     if(this.props.registeruserdata.message==="you are already registered."){
       
         if (startdate > nowdate && nowdate<enddate) {
-          this.setState({ open: true, message: "The contest is not active. Either the Contest has not started or its not your slot, please wait for your time slot or the contest to start.", header:"Message!" });
+            this.setState({ open: true, message: "The contest is not active. Either the Contest has not started or its not your slot, please wait for your time slot or the contest to start.", header:"Message!" });
         }
         else if(enddate < nowdate && nowdate>startdate){
           this.setState({ open: true, message: "The contest is not active. Either the Contest has ended or you have missed your slot, please contact admin if it's a mistake.", header:"Message!" });
         }
         else{
+          
             this.setState({
                 open:true,
                 header:"Confirm Message!",
                 message:"Are you sure you want to start the contest. After clicking this you won't be able to backoff",
-                confirm:true,
-                
+                confirm:true,                
             })
         }
       
@@ -81,7 +83,7 @@ class ContestHome extends Component {
           </div>
           <div className="col-md-5">
             <button
-            onClick={e=>this.CompareDate(e)}
+            onClick={e=>this.CompareDate(e,this.props.data[id].starttime,this.props.data[id].endtime)}
               
               className="contest-register-button"
             >

@@ -30,7 +30,7 @@ export const getContest = () => {
         axiosConfig
       )
       .then((res) => {
-        console.log("GETTED CONTESTS"+res.data.contests);
+        
         dispatch(getContestSuccess(res.data.contests));
 
       })
@@ -80,8 +80,7 @@ export const postContest = (user_name, pwd) => {
         axiosConfig
       )
       .then((res) => {
-        console.log('RESPONSE RECEIVED: ', res);
-        
+       
         dispatch(
           postContestSuccess(res.data.token, res.data.designation, res.data.full_name)
         );
@@ -123,7 +122,7 @@ export const registerContest = (uid,cid) => {
       }
     })
       .then((res) => {
-        console.log('RESPONSE RECEIVED: ', res.data);
+        
         dispatch(
           registerContestSuccess(res.data)
         );
@@ -172,7 +171,6 @@ export const getContestToken = (user_name, pwd) => {
         axiosConfig
       )
       .then((res) => {
-        console.log('RESPONSE RECEIVED: ', res);
         
         dispatch(
           getContestTokenSuccess(res.data.token)

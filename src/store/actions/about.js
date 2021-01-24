@@ -32,7 +32,7 @@ export const getMember = () => {
         axiosConfig
       )
       .then((res) => {
-        console.log("Members"+res)
+        
         dispatch(
           getMemberSuccess(res.data.members)
         );

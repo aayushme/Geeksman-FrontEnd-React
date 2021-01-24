@@ -13,27 +13,35 @@ class ContestCard extends Component {
     redirect: false,
     redirectto: false,
     show: false,
-    redirecttouser:false
+    redirecttouser:false,
+    page:"not"
   };
 
   handleActiveContest = (e, userid, id, index) => {
     e.preventDefault();
 
-    if (
-      this.props.userdata.college === null ||
-      this.props.userdata.phoneno === null ||
-      this.props.userdata.year === null ||
-      this.props.userdata.Branch === null
-    ) {
-      this.setState({ show: true });
-    }  else {
-      this.props.registerContest(userid, id);
-      this.setState({ redirectto: true });
-
-      if (this.props.userdata) {
-        localStorage.setItem("activecontest", index);
+    if(this.props.isAuthenticated){
+      if (
+        this.props.userdata.college === null ||
+        this.props.userdata.phoneno === null ||
+        this.props.userdata.year === null ||
+        this.props.userdata.Branch === null
+      ) {
+        this.setState({ show: true,message:"You have to complete your details before registering for any contest" });
+      }  else {
+        this.props.registerContest(userid, id);
+        this.setState({ redirectto: true });
+  
+        if (this.props.userdata) {
+          localStorage.setItem("activecontest", index);
+        }
       }
     }
+    else{
+      this.setState({ show: true,message:"Please Login First",page:"login" });
+    }
+
+    
   };
 
   handleRedirect = () => {
@@ -49,17 +57,27 @@ class ContestCard extends Component {
     let authRedirect = null;
 
     if (this.state.redirect) {
-      authRedirect = (
-        <Redirect to={"/contests/" + this.props.contestname + "/"} />
-      );
+      
+        authRedirect = (
+          <Redirect to={"/contests/" + this.props.contestname + "/"} />
+        );
+     
     }
 
     let authRedirect2 = null;
 
     if (this.state.redirecttouser) {
+
+      if(this.state.page==="login"){
+        authRedirect = (
+          <Redirect to="/login"/>
+        );
+      }
+      else{
       authRedirect2 = (
         <Redirect to="/userpanel" />
       );
+      }
     }
 
     if (this.state.registeruserdata !== null) {
@@ -116,7 +134,7 @@ class ContestCard extends Component {
         <Modal
           show={this.state.show}
           heading="Error Correction"
-          message="You have to complete your details before registering for any contest"
+          message={this.state.message}
           field=""
           confirm="true"
           redirect={e=>this.handleRedirectToUserPanel(e)}
@@ -138,6 +156,7 @@ const mapStateToProps = (state) => {
   return {
     userdata: state.user.userdata,
     registeruserdata: state.contest.registeruserdata,
+    isAuthenticated:state.auth.token!==null
   };
 };
 

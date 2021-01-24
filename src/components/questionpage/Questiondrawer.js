@@ -294,7 +294,7 @@ function ResponsiveDrawer(props) {
               </div>
 
               <div className="row prevnextbtn">
-                <div className="col-sm-4 prev-button">
+                <div className="col-sm-4 hidden">
                   <Button
                     color="danger"
                     variant="contained"
@@ -303,7 +303,7 @@ function ResponsiveDrawer(props) {
                     &larr; prev
                   </Button>
                 </div>
-                <div className="col-sm-4 next-button">
+                <div className="col-sm-4 hidden">
                   <Button
                     variant="contained"
                     color="danger"
@@ -398,7 +398,29 @@ function ResponsiveDrawer(props) {
               <br />
               <br />
               <div className="row">
-                <div className="col-sm-5">
+                <div className="column50">
+              <div className="row">
+                <div className="col-sm-6">
+                  <button
+                    onClick={(e) => handlePrev(e)}
+                    className="login-button hiddenpc"
+                  >
+                    Prev
+                  </button>
+                </div>
+                <div className="col-sm-6">
+                  <button
+                    onClick={(e) => handleNext(e)}
+                    className="login-button hiddenpc"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+              </div>
+              <div className="column50">
+              <div className="row">
+                <div className="col-sm-6">
                   <button
                     onClick={(e) => createArrayQuestions(e)}
                     className="login-button"
@@ -406,7 +428,7 @@ function ResponsiveDrawer(props) {
                     Save
                   </button>
                 </div>
-                <div className="col-sm-5">
+                <div className="col-sm-6">
                   <button
                     onClick={(e) => removeArrayQuestions(e)}
                     className="login-button"
@@ -415,6 +437,8 @@ function ResponsiveDrawer(props) {
                   </button>
                 </div>
               </div>
+              </div>
+             </div>
             </FormControl>
           </div>
         </Typography>

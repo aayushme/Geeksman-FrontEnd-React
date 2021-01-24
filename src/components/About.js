@@ -141,12 +141,12 @@ const About = (props) => {
         <Coordinators
           image={image2}
           name="Dr. Neelam Duhan"
-          post="Club Coordinator"
+          post="Director digital cell, Club Coordinator Geeksman"
         />
         <Coordinators
           image={image1}
-          name="Dr. Komal Bhatia"
-          post="Dean Informatics, Chairerson CE dept"
+          name="Dr. Komal Kumar Bhatia"
+          post="Dean Informatics and computing, Chairerson Computer Engineering dept"
         />
       </div>
       <div className="our__members">

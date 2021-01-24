@@ -34,7 +34,6 @@ export const getUser = (userid) => {
         
       )
       .then((res) => {
-        console.log('RESPONSE RECEIVED: ', res);
         
         dispatch(
           getUserSuccess(res.data.user)
@@ -81,8 +80,7 @@ export const getUserContest = (uid) => {
         
       )
       .then((res) => {
-        console.log('USER DATA IS: ', res);
-        
+       
         dispatch(
           getUserContestSuccess(res.data)
         );
@@ -171,7 +169,7 @@ export const patchUser = (userid,college,year,Branch,phoneno) => {
       }
     })
      .then(response => {
-       console.log(response)
+       
        alert("details Updated Successfully")
        dispatch(postUserSuccess(response.status));
        window.location.reload()

@@ -151,12 +151,9 @@ export const getContestTokenFail = (error) => {
 
 
 
-export const getContestToken = (user_name, pwd) => {
+export const getContestToken = (uid,cid) => {
   return (dispatch) => {
-    var postData = JSON.stringify({
-      username: user_name,
-      password: pwd,
-    });
+    
 
     let axiosConfig = {
       headers: {
@@ -165,14 +162,14 @@ export const getContestToken = (user_name, pwd) => {
     };
 
     axios
-      .post(
-        'https://mis2020.herokuapp.com/rest-auth/login/',
-        postData,
+      .get(
+        process.env.REACT_APP_PUBLIC+"/gettesttoken/"+cid,
         axiosConfig
       )
       .then((res) => {
-        
+        console.log(res.data)
         dispatch(
+          
           getContestTokenSuccess(res.data.token)
         );
       })

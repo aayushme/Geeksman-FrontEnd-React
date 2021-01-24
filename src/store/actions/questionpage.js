@@ -37,7 +37,7 @@ export const getQuestions = (token) => {
 
     axios
       .post(
-        process.env.PUBLIC_API_URL+'/rest-auth/login/',
+        process.env.PUBLIC_API_URL+'/questions',
         axiosConfig
       )
       .then((res) => {

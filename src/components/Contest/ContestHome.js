@@ -15,16 +15,13 @@ class ContestHome extends Component {
     header:"",
     contest:[]
   };
- 
 
   CompareDate = (e, start,end) => {
     e.preventDefault();
-    console.log(this.props.data)
     let startdate = new Date(start)
     let enddate = new Date(end)
     let nowdate = new Date();
-    console.log(startdate)
-
+   
     if(this.props.registeruserdata.message==="you are already registered."){
       
         if (startdate > nowdate && nowdate<enddate) {
@@ -34,7 +31,6 @@ class ContestHome extends Component {
           this.setState({ open: true, message: "The contest is not active. Either the Contest has ended or you have missed your slot, please contact admin if it's a mistake.", header:"Message!" });
         }
         else{
-          
             this.setState({
                 open:true,
                 header:"Confirm Message!",
@@ -49,8 +45,8 @@ class ContestHome extends Component {
 
 
   onRedirect = (e) => {
-      e.preventDefault();
-      this.props.getContestToken(this.props.registeruserdata._id,this.props.registeruserdata.ContestId);
+      e.preventDefault(); 
+      this.props.getContestToken(this.props.registeruserdata.registereduser._id,this.props.registeruserdata.registereduser.ContestId);
       this.setState({redirect:true})
   };
 
@@ -59,7 +55,7 @@ class ContestHome extends Component {
 
     var id=(localStorage.getItem("activecontest"));
 
-    if (this.state.redirect) {
+    if (this.state.redirect && this.props.contesttoken!==null) {
       authRedirect = (
         <Redirect to={"/contests/" + this.props.data[id].Contestname + "/questions"} />
       );
@@ -118,7 +114,8 @@ const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     data: state.contest.contestdata,
-    registeruserdata:state.contest.registeruserdata
+    registeruserdata:state.contest.registeruserdata,
+    contesttoken:state.contest.contesttoken
   };
 };
 

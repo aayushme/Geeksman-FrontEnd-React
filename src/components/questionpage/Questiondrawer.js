@@ -94,6 +94,9 @@ function ResponsiveDrawer(props) {
       );
   }
 
+  React. useEffect(() => {
+    props.getQuestions(props.contesttoken)
+  },[]);
 
   //Mobile Screen
   const handleDrawerToggle = () => {
@@ -135,6 +138,7 @@ function ResponsiveDrawer(props) {
   //Submit Button
   const handlePostQuestions = () => {
     props.postQuestions(props.token, localStorage.getItem(["submissions"]));
+    console.log(localStorage.getItem(["submissions"]))
     setShow(true);
   };
 

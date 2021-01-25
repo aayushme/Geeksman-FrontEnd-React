@@ -19,9 +19,10 @@ class ContestHome extends Component {
 
   CompareDate = (e, start,end) => {
     e.preventDefault();
-    let startdate = new Date(start)
-    let enddate = new Date(end)
+    let startdate = start
+    let enddate = end
     let nowdate = new Date();
+    console.log(startdate)
    
     if(this.props.registeruserdata.message==="you are already registered."){
       

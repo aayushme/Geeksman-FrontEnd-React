@@ -6,6 +6,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import Modal from "../utils/modals/modal";
 import { Redirect } from "react-router-dom";
 import geeksman from "../images/png/geeksman.png";
+import Loader from '../Loader/Loader'
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -25,6 +26,7 @@ class LoginPage extends Component {
     modalmessage: "",
     modalheader: "",
     field: "",
+    loader: false
   };
 
  
@@ -125,6 +127,8 @@ class LoginPage extends Component {
 
     return (
       <>
+      <Loader/>
+      
         <div className="section">
           <div class={this.state.activeClass}>
             <div class="user signinBx">

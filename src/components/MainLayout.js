@@ -9,7 +9,7 @@ import Contact from "./contact";
 import UserPanel from "./userpanel/userpanel";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/index";
-
+import Loader from './Loader/Loader'
 
 class MainLayout extends Component {
 
@@ -33,6 +33,7 @@ class MainLayout extends Component {
             <Route path="/about" component={About} />
             <Route path="/userpanel" component={UserPanel} />
             <Route path="/contact" component={Contact} />
+            <Route path="/loader" component={Loader} />
             <Route path="*" component={NotFound} />
           </Switch>
         ) : (
@@ -42,6 +43,7 @@ class MainLayout extends Component {
             <Route path="/contests" component={Contests} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+          <Route path="/loader" component={Loader}/>
             <Route path="*" component={NotFound} />
           </Switch>
         )}

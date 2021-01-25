@@ -77,14 +77,27 @@ export const postQuestionsStart = () => {
   export const postQuestions = (token,data) => {
     return (dispatch) => {
     
+      var answer = JSON.parse(data);
+      
+
+      var postData = ({
+        answer:answer
+      });
+
+      console.log(postData)
   
-      axios({
-        method: 'post',
-        url: `${process.env.REACT_APP_PUBLIC}/submit`,
-        data:{
-          data
-        }
-       })
+      let axiosConfig = {
+        headers: {
+          'Authorization': 'Bearer '+token
+        },
+      };
+  
+      axios
+        .post(
+          process.env.REACT_APP_PUBLIC+"/submit",
+          postData,
+          axiosConfig
+        )
         .then((res) => {
           console.log('Questions Posted ', res);
           localStorage.clear(["submissions"])
@@ -93,8 +106,8 @@ export const postQuestionsStart = () => {
           );
         })
         .catch((err) => {
-          localStorage.clear(["submissions"])
           dispatch(postQuestionsFail(err))
+          console.log(err)
         });
     };
   };

@@ -138,8 +138,7 @@ function ResponsiveDrawer(props) {
 
   //Submit Button
   const handlePostQuestions = () => {
-    props.postQuestions(props.token, localStorage.getItem(["submissions"]));
-    console.log(localStorage.getItem(["submissions"]));
+    props.postQuestions(props.contesttoken, localStorage.getItem(["submissions"]));
     setShow(true);
     setConfirmbutton("true");
     setMessage("Are you sure you want to submit your test?")
@@ -148,7 +147,7 @@ function ResponsiveDrawer(props) {
   //Post questions by timer
 
   const handePostForce=()=>{
-    props.postQuestions(props.token, localStorage.getItem(["submissions"]));
+    props.postQuestions(props.contesttoken, localStorage.getItem(["submissions"]));
     setShow(true);
     setConfirmbutton("false");
     setMessage("The time has ended your test has been successfully submitted!")
@@ -252,7 +251,6 @@ function ResponsiveDrawer(props) {
     }
 
     const help = myArray.findIndex((rank) => rank.Question_Id === index);
-    console.log(help);
     if (help >= 0 && help <= 49) {
       return true;
     } else {

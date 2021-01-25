@@ -22,6 +22,7 @@ import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import Modal from '../utils/modals/modal'
 import {Redirect} from 'react-router-dom'
+import Spinner from '../utils/spinner'
 
 const drawerWidth = 240;
 
@@ -137,6 +138,7 @@ function UserPanel(props) {
 
   return (
     <div className={classes.root}>
+      
       {authRedirect2}
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
@@ -218,17 +220,7 @@ function UserPanel(props) {
                   <h2 className="participationheadingstyle">Participation:</h2>
                 </div>
                 <div className="contestinfocards">
-                  {props.usercontests === null && (
                     <h3>You haven't participated in any contest uptil now!!</h3>
-                  )}
-                  {props.usercontestdata !== null &&
-                    props.usercontestdata.map((contest) => (
-                      <Participation
-                        contestname={contest.contestname}
-                        rank="null"
-                        marks={contest.marks}
-                      />
-                    ))}
                 </div>
               </div>
             </div>

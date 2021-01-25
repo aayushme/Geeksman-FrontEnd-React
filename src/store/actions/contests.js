@@ -153,8 +153,8 @@ export const getContestTokenFail = (error) => {
 
 export const getContestToken = (uid,cid) => {
   return (dispatch) => {
-    
-
+    console.log(uid)
+    console.log(cid)
     
     axios({
       method: 'post',

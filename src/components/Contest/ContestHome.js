@@ -44,9 +44,9 @@ class ContestHome extends Component {
   };
 
 
-  onRedirect = (e) => {
+  onRedirect = (e,id) => {
       e.preventDefault(); 
-      this.props.getContestToken(this.props.registeruserdata.registereduser._id,this.props.registeruserdata.registereduser.ContestId);
+      this.props.getContestToken(this.props.userid,this.props.data[id]._id);
       this.setState({redirect:true})
   };
 
@@ -93,7 +93,7 @@ class ContestHome extends Component {
         <Modal
           show={this.state.open}
           message={this.state.message}
-          redirect={e=>this.onRedirect(e)}
+          redirect={e=>this.onRedirect(e,id)}
           confirm={this.state.confirm}
           heading={this.state.header}
           field=""
@@ -120,6 +120,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     data: state.contest.contestdata,
+    userid:state.auth.userid,
     registeruserdata:state.contest.registeruserdata,
     contesttoken:state.contest.contesttoken,
     questiondata: state.question.questionsdata,

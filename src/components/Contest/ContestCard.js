@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 import Modal from "../utils/modals/modal";
+import Loader from '../Loader/Loader'
 
 class ContestCard extends Component {
   state = {
@@ -87,6 +88,7 @@ class ContestCard extends Component {
     }
 
     return (
+      <>
       <div className="contest-card">
         {authRedirect}
         {authRedirect2}
@@ -140,7 +142,9 @@ class ContestCard extends Component {
           redirect={e=>this.handleRedirectToUserPanel(e)}
         />
       </div>
+     </>
     );
+
   }
 }
 

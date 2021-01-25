@@ -36,7 +36,8 @@ const authFail = (state, action) => {
 
 const forgetSuccess = (state, action) => {
   return updateObject(state, {
-    forgetstatus:action.forgetstatus
+    forgetstatus:action.forgetstatus,
+    loading:false
   });
 };
 

@@ -9,17 +9,13 @@
     padding: 0;
     z-index: 1000;
     background-color:rgba(0,0,0,.8);
+    position: absolute;
   }
 .spinnerf {
     width:90px;
     height:90px; 
     border-radius: 50%;
     perspective: 800px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    
   }
   
   .innerf {

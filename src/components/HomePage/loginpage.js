@@ -26,10 +26,8 @@ class LoginPage extends Component {
     modalmessage: "",
     modalheader: "",
     field: "",
-    loader: false
+    loader:false
   };
-
- 
 
 
   signInShow = (e) => {
@@ -56,6 +54,7 @@ class LoginPage extends Component {
       });
     } else {
       this.props.reduxLogin(this.state.email, this.state.password);
+      this.setState({loader:true})
     }
   };
 
@@ -127,7 +126,14 @@ class LoginPage extends Component {
 
     return (
       <>
-      <Loader/>
+      {(this.props.loading)?<Loader/>:<></>}
+
+      {this.props.posterror!==""?<Modal
+          show={true}
+          message="You are already registered or you have not verified your mail"
+          confirm="false"
+          heading="Error"
+        />:<></>}
       
         <div className="section">
           <div class={this.state.activeClass}>
@@ -263,6 +269,7 @@ class LoginPage extends Component {
           heading={this.state.modalheader}
           field={this.state.field}
         />
+        
        
       </>
     );
@@ -286,7 +293,9 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.auth.token!==null,
     forgetstatus: state.auth.forgetstatus,
     error:state.auth.autherror,
-    errorauth:state.auth.autherror!==null
+    errorauth:state.auth.autherror!==null,
+    loading:state.auth.loading,
+    posterror:state.user.posterror
   };
 };
 

@@ -19,7 +19,8 @@ const initialState = {
     }
   ],
   usercontestdata:[],
-  patchStatus:null
+  patchStatus:null,
+  posterror:""
 };
 
 
@@ -60,6 +61,7 @@ const postUserSuccess = (state, action) => {
     return updateObject(state, {
       error: action.error,
       loading: false,
+      posterror:action.posterror
     });
   };
 

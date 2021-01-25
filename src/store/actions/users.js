@@ -104,7 +104,7 @@ export const postUserSuccess = (poststatus) => {
   export const postUserError = (error) => {
     return {
       type: actionTypes.POST_USER_FAIL,
-      error: error,
+      posterror: error,
     };
   };
   
@@ -130,6 +130,7 @@ export const postUserSuccess = (poststatus) => {
        })
        .catch(error => {
        console.log(error)
+       dispatch(postUserError(error.message))
        });
     };
   };

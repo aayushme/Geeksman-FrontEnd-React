@@ -5,6 +5,7 @@ import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 import Modal from "../utils/modals/modal";
 import { Redirect } from "react-router-dom";
+import Loader from '../Loader/Loader'
 
 class ContestHome extends Component {
   state = {
@@ -65,7 +66,10 @@ class ContestHome extends Component {
     }
 
     return (
+      <>
+      
       <div id="contest-home">
+        
         <ContestHeader content="Contests" />
         <div className="row">
           <div className="col-md-7">
@@ -100,6 +104,7 @@ class ContestHome extends Component {
         />
         {authRedirect}
       </div>
+      </>
     );
   }
 }
@@ -124,6 +129,7 @@ const mapStateToProps = (state) => {
     registeruserdata:state.contest.registeruserdata,
     contesttoken:state.contest.contesttoken,
     questiondata: state.question.questionsdata,
+    loading:state.contest.tokenloading
   };
 };
 

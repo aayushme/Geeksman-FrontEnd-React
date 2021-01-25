@@ -23,8 +23,8 @@ import Button from "@material-ui/core/Button";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 import aayush from "../images/png/aayush.jpg";
-import Modal from '../utils/modals/modal'
-import {Redirect} from 'react-router-dom'
+import Modal from "../utils/modals/modal";
+import { Redirect } from "react-router-dom";
 
 const drawerWidth = 290;
 
@@ -67,36 +67,36 @@ function ResponsiveDrawer(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [selectedindex, setselected] = React.useState(0);
-  const [selectedOption, setSelectedOption] = React.useState({});
   const [activequestion, setactivequestion] = React.useState(
     props.questiondata[0]
   );
   const [tickicon, setTickicon] = React.useState(
     <DoneIcon style={{ color: "green" }} />
   );
-  const [value, setValue] = React.useState(activequestion.options.opt1.value);
+  const [value, setValue] = React.useState(activequestion.options[0].value);
   const [savedindex, setSavedindex] = React.useState(null);
   const [hour, setHour] = React.useState(-1);
   const [minutes, setMinutes] = React.useState(-1);
   const [seconds, setSeconds] = React.useState(-1);
-  const [show,setShow]=React.useState(false);
-  const [redirect,setRedirect] = React.useState(false)
+  const [show, setShow] = React.useState(false);
+  const [redirect, setRedirect] = React.useState(false);
+  const [message,setMessage] = React.useState("");
+  const [confirmbutton,setConfirmbutton] =React.useState("");
 
-  const handleTestEnd=()=>{
+  const handleTestEnd = () => {
     setRedirect(true);
-  }
+  };
 
   let authRedirect = null;
 
   if (redirect) {
-      authRedirect = (
-        <Redirect to="/" />
-      );
+    authRedirect = <Redirect to="/" />;
   }
 
-  React. useEffect(() => {
-    props.getQuestions(props.contesttoken)
-  },[]);
+  React.useEffect(() => {
+    console.log(props.questiondata);
+    handleFindValue();
+  }, []);
 
   //Mobile Screen
   const handleDrawerToggle = () => {
@@ -105,7 +105,8 @@ function ResponsiveDrawer(props) {
 
   //get Questions
   useEffect(() => {
-    var countDownDate = new Date("Sep 25, 2025 11:37:00").getTime();
+    var countDownIs = new Date().getTime();
+    var countDownDate = countDownIs+(1*60*60*1000)
 
     // Update the count down every 1 second
     var x = setInterval(function () {
@@ -129,8 +130,8 @@ function ResponsiveDrawer(props) {
       // If the count down is over, write some text
       if (hours === 0 && seconds === 0 && minutes === 0) {
         clearInterval(x);
-        handlePostQuestions();
-        console.log("done");
+        handePostForce();
+        
       }
     }, 1000);
   }, []);
@@ -138,9 +139,20 @@ function ResponsiveDrawer(props) {
   //Submit Button
   const handlePostQuestions = () => {
     props.postQuestions(props.token, localStorage.getItem(["submissions"]));
-    console.log(localStorage.getItem(["submissions"]))
+    console.log(localStorage.getItem(["submissions"]));
     setShow(true);
+    setConfirmbutton("true");
+    setMessage("Are you sure you want to submit your test?")
   };
+
+  //Post questions by timer
+
+  const handePostForce=()=>{
+    props.postQuestions(props.token, localStorage.getItem(["submissions"]));
+    setShow(true);
+    setConfirmbutton("false");
+    setMessage("The time has ended your test has been successfully submitted!")
+  }
 
   //Load Selection of Radio Buttons
   const createSelection = (e, value) => {
@@ -157,15 +169,15 @@ function ResponsiveDrawer(props) {
     }
 
     var data = {
-      Question_Id: activequestion.id,
+      Question_Id: activequestion._id,
       optionchosen: value,
     };
 
     console.log(myArray.length);
 
-    if (myArray.find((element) => element.Question_Id === activequestion.id)) {
+    if (myArray.find((element) => element.Question_Id === activequestion._id)) {
       for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].Question_Id === activequestion.id) {
+        if (myArray[i].Question_Id === activequestion._id) {
           myArray[i] = data;
         }
       }
@@ -175,6 +187,24 @@ function ResponsiveDrawer(props) {
 
     // re-save array
     localStorage.setItem(["submissions"], JSON.stringify(myArray));
+  };
+
+  const handleFindValue = (questionsid) => {
+    var myArray = [];
+    // load saved array
+    if (localStorage.getItem(["submissions"]) != null) {
+      myArray = JSON.parse(localStorage.getItem(["submissions"]));
+    }
+    var arris = myArray.find(
+      (element) => element.Question_Id === questionsid
+    );
+
+    if (arris !== undefined) {
+      setValue(arris.optionchosen);
+    }
+    else{
+      setValue(value);
+    }
   };
 
   //Clear Selection
@@ -187,6 +217,7 @@ function ResponsiveDrawer(props) {
   //Handle Previous Button
   const handlePrev = (e) => {
     e.preventDefault();
+    handleFindValue(activequestion._id);
     if (selectedindex !== 0) {
       setselected(selectedindex - 1);
       setactivequestion(props.questiondata[selectedindex - 1]);
@@ -200,6 +231,7 @@ function ResponsiveDrawer(props) {
   //Handle Next Button
   const handleNext = (e) => {
     e.preventDefault();
+    handleFindValue(activequestion._id);
     var len = Object.keys(props.questiondata).length - 1;
     if (selectedindex !== len) {
       setselected(selectedindex + 1);
@@ -244,10 +276,11 @@ function ResponsiveDrawer(props) {
               alignItems="center"
               index={index}
               selected={selectedindex === index}
-              key={questions.id}
+              key={questions._id}
               onClick={() => {
                 setactivequestion(questions);
                 setselected(index);
+                handleFindValue(questions._id)
               }}
             >
               <ListItemIcon>
@@ -257,7 +290,7 @@ function ResponsiveDrawer(props) {
               <ListItemText center primary={"Question-" + index} />
               <ListItemIcon>
                 {localStorage.getItem(["submissions"])
-                  ? handleGreenTick(questions.id)
+                  ? handleGreenTick(questions._id)
                     ? tickicon
                     : null
                   : null}
@@ -317,14 +350,14 @@ function ResponsiveDrawer(props) {
                   </Button>
                 </div>
                 <div className="col-sm-4 next-button">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={(e) => handlePostQuestions(e)}
-                  className="submit-button"
-                >
-                  Submit
-                </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={(e) => handlePostQuestions(e)}
+                    className="submit-button"
+                  >
+                    Submit
+                  </Button>
                 </div>
               </div>
             </div>
@@ -373,82 +406,85 @@ function ResponsiveDrawer(props) {
           </div>
           <div className="optionsselect">
             <FormControl component="fieldset">
-              <RadioGroup aria-label="Questions" name="Question" value={value}>
+              <RadioGroup aria-label="Questions" name="Question" value={value} >
                 <FormControlLabel
-                  value={activequestion.options.opt1.value}
+                  value={activequestion.options[0].value}
                   control={<Radio onClick={(e) => createSelection(e)} />}
-                  label={activequestion.options.opt1.option}
+                  label={activequestion.options[0].option}
                 />
                 <FormControlLabel
-                  value={activequestion.options.opt2.value}
+                  value={activequestion.options[1].value}
                   control={<Radio onClick={(e) => createSelection(e)} />}
-                  label={activequestion.options.opt2.option}
+                  label={activequestion.options[1].option}
                 />
                 <FormControlLabel
-                  value={activequestion.options.opt3.value}
+                  value={activequestion.options[2].value}
                   control={<Radio onClick={(e) => createSelection(e)} />}
-                  label={activequestion.options.opt3.option}
+                  label={activequestion.options[2].option}
                 />
                 <FormControlLabel
-                  value={activequestion.options.opt4.value}
-                  control={
-                    <Radio
-                      onClick={(e) => createSelection(e, e.target.value)}
-                    />
-                  }
-                  label={activequestion.options.opt4.option}
+                  value={activequestion.options[3].value}
+                  control={<Radio onClick={(e) => createSelection(e)} />}
+                  label={activequestion.options[3].option}
                 />
               </RadioGroup>
               <br />
               <br />
               <div className="row">
                 <div className="column50">
-              <div className="row">
-                <div className="col-sm-6">
-                  <button
-                    onClick={(e) => handlePrev(e)}
-                    className="login-button hiddenpc"
-                  >
-                    Prev
-                  </button>
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <button
+                        onClick={(e) => handlePrev(e)}
+                        className="login-button hiddenpc"
+                      >
+                        Prev
+                      </button>
+                    </div>
+                    <div className="col-sm-6">
+                      <button
+                        onClick={(e) => handleNext(e)}
+                        className="login-button hiddenpc"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div className="col-sm-6">
-                  <button
-                    onClick={(e) => handleNext(e)}
-                    className="login-button hiddenpc"
-                  >
-                    Next
-                  </button>
+                <div className="column50">
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <button
+                        onClick={(e) => createArrayQuestions(e)}
+                        className="login-button"
+                      >
+                        Save
+                      </button>
+                    </div>
+                    <div className="col-sm-6">
+                      <button
+                        onClick={(e) => removeArrayQuestions(e)}
+                        className="login-button"
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-              </div>
-              <div className="column50">
-              <div className="row">
-                <div className="col-sm-6">
-                  <button
-                    onClick={(e) => createArrayQuestions(e)}
-                    className="login-button"
-                  >
-                    Save
-                  </button>
-                </div>
-                <div className="col-sm-6">
-                  <button
-                    onClick={(e) => removeArrayQuestions(e)}
-                    className="login-button"
-                  >
-                    Clear
-                  </button>
-                </div>
-              </div>
-              </div>
-             </div>
             </FormControl>
           </div>
         </Typography>
       </main>
       {authRedirect}
-      <Modal show={show} message="Are you sure you want to end the test?" header="Caution!" field="" confirm="true" redirect={e=>handleTestEnd()} />
+      <Modal
+        show={show}
+        message={message}
+        header="Caution!"
+        field=""
+        confirm={confirmbutton}
+        redirect={(e) => handleTestEnd()}
+      />
     </div>
   );
 }
@@ -469,6 +505,7 @@ const mapStateToProps = (state) => {
     token: state.auth.token,
     questiondata: state.question.questionsdata,
     contesttoken: state.contest.contesttoken,
+    contestdata:state.contest.contestdata
   };
 };
 

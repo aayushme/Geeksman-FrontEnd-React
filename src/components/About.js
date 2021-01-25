@@ -146,7 +146,7 @@ const About = (props) => {
         <Coordinators
           image={image1}
           name="Dr. Komal Kumar Bhatia"
-          post="Dean Informatics and computing, Chairperson Computer Engineering dept"
+          post="Chairperson Computer Engineering dept"
         />
       </div>
       <div className="our__members">

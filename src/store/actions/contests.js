@@ -155,17 +155,15 @@ export const getContestToken = (uid,cid) => {
   return (dispatch) => {
     
 
-    let axiosConfig = {
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-    };
-
-    axios
-      .get(
-        process.env.REACT_APP_PUBLIC+"/gettesttoken/"+cid,
-        axiosConfig
-      )
+    
+    axios({
+      method: 'post',
+      url: `${process.env.REACT_APP_PUBLIC}/gettesttoken/`,
+      data:{
+        uid,
+        cid
+      }
+    })
       .then((res) => {
         console.log(res.data)
         dispatch(

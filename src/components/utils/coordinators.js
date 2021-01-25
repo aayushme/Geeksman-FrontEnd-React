@@ -6,7 +6,7 @@ class Developer extends Component {
       <div>
         
         
-        <div class="card">
+        <div class="card heightis">
     <div class="bannercr">
       <img src={this.props.image}/>
     </div>

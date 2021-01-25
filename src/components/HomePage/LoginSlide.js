@@ -14,7 +14,7 @@ class LoginSlide extends Component {
         <div className="login-slide container-fluid">
           <img src={mainpng} className="mainpng" alt="mainimg"/>
           <div className="login-slide-text-content">
-            <h1>Geeksman - The Coding Society</h1>
+            <h1>GeeksMan - The Coding Society</h1>
             <br />
             Join the <strong>Coding Society</strong> of CE Department of JCBOSE UST, YMCA{" "}
             <br />

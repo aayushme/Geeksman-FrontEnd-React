@@ -56,6 +56,9 @@ class ContestHome extends Component {
     var id=(localStorage.getItem("activecontest"));
 
     if (this.state.redirect && this.props.contesttoken!==null) {
+      this.props.getQuestions(this.props.contesttoken)
+    }
+    if(this.props.questiondata!==null){
       authRedirect = (
         <Redirect to={"/contests/" + this.props.data[id].Contestname + "/questions"} />
       );
@@ -106,6 +109,9 @@ const mapDispatchToProps = (dispatch) => {
     getContestToken: (uid,cid) => {
       dispatch(actions.getContestToken(uid,cid));
     },
+    getQuestions: (token) => {
+      dispatch(actions.getQuestions(token));
+    },
     
   };
 };
@@ -115,7 +121,8 @@ const mapStateToProps = (state) => {
     token: state.auth.token,
     data: state.contest.contestdata,
     registeruserdata:state.contest.registeruserdata,
-    contesttoken:state.contest.contesttoken
+    contesttoken:state.contest.contesttoken,
+    questiondata: state.question.questionsdata,
   };
 };
 

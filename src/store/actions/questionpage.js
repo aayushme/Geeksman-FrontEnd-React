@@ -12,7 +12,7 @@ export const getQuestionsStart = () => {
 export const getQuestionsSuccess = (data) => {
   return {
     type: actionTypes.GET_QUESTIONS_SUCCESS,
-    questiondata:data
+    questionsdata:data
   };
 };
 
@@ -28,20 +28,15 @@ export const getQuestionsFail = (error) => {
 export const getQuestions = (token) => {
   return (dispatch) => {
     dispatch(getQuestionsStart());
-    
-    let axiosConfig = {
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-    };
-
-    axios
-      .post(
-        process.env.PUBLIC_API_URL+'/questions',
-        axiosConfig
-      )
+        axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_PUBLIC}/testquestions/`,
+        headers: {
+          'Authorization': 'Bearer '+token
+        }
+      })
       .then((res) => {
-        console.log('Questions Get ', res);
+        console.log('Questions Get ', res.data);
         
         dispatch(
           getQuestionsSuccess(res.data)
@@ -81,31 +76,24 @@ export const postQuestionsStart = () => {
   
   export const postQuestions = (token,data) => {
     return (dispatch) => {
-      dispatch(postQuestionsStart());
-      var postData = JSON.stringify({
-        data:data,
-      });
+    
   
-      let axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-        },
-      };
-  
-      axios
-        .post(
-          process.env.PUBLIC_API_URL+'/rest-auth/login/',
-          postData,
-          axiosConfig
-        )
+      axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_PUBLIC}/submit`,
+        data:{
+          data
+        }
+       })
         .then((res) => {
           console.log('Questions Posted ', res);
-          
+          localStorage.clear(["submissions"])
           dispatch(
             postQuestionsSuccess(res.status)
           );
         })
         .catch((err) => {
+          localStorage.clear(["submissions"])
           dispatch(postQuestionsFail(err))
         });
     };

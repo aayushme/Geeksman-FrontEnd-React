@@ -24,7 +24,7 @@ class ContestHome extends Component {
     let nowdate = new Date();
     console.log(startdate)
    
-    if(this.props.registeruserdata.message==="you are already registered."){
+    
       
         if (startdate > nowdate && nowdate<enddate) {
             this.setState({ open: true, message: "The contest is not active. Either the Contest has not started or its not your slot, please wait for your time slot or the contest to start.", header:"Message!" });
@@ -41,14 +41,13 @@ class ContestHome extends Component {
             })
         }
       
-    }
     
   };
 
 
   onRedirect = (e,id) => {
       e.preventDefault(); 
-      this.props.getContestToken(this.props.userid,this.props.data[id]._id);
+      this.props.getContestToken(this.props.userid,this.props.data[id].id);
       this.setState({redirect:true})
   };
 
@@ -88,7 +87,6 @@ class ContestHome extends Component {
           <div className="col-md-5">
             <button
             onClick={e=>this.CompareDate(e,this.props.data[id].starttime,this.props.data[id].endtime)}
-              
               className="contest-register-button"
             >
               Start Now

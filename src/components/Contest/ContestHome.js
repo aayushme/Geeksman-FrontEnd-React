@@ -19,9 +19,10 @@ class ContestHome extends Component {
 
   CompareDate = (e, start,end) => {
     e.preventDefault();
-    let startdate = start
-    let enddate = end
-    let nowdate = new Date();
+
+    let startdate = new Date(start);
+    let enddate = new Date(end);
+    let nowdate = Date();
     console.log(startdate)
    
     
@@ -67,7 +68,6 @@ class ContestHome extends Component {
 
     return (
       <>
-      
       <div id="contest-home">
         
         <ContestHeader content="Contests" />

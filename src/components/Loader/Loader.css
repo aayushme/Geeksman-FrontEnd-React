@@ -10,10 +10,11 @@
     z-index: 1000;
     background-color:rgba(0,0,0,.8);
     position: absolute;
+    overflow: hidden;
   }
 .spinnerf {
-    width:90px;
-    height:90px; 
+    width:200px !important;
+    height:200px !important; 
     border-radius: 50%;
     perspective: 800px;
   }

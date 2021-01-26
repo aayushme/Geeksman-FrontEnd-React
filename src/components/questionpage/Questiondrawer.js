@@ -433,26 +433,6 @@ function ResponsiveDrawer(props) {
                   <div className="row">
                     <div className="col-sm-6">
                       <button
-                        onClick={(e) => handlePrev(e)}
-                        className="login-button hiddenpc"
-                      >
-                        Prev
-                      </button>
-                    </div>
-                    <div className="col-sm-6">
-                      <button
-                        onClick={(e) => handleNext(e)}
-                        className="login-button hiddenpc"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="column50">
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <button
                         onClick={(e) => createArrayQuestions(e)}
                         className="login-button"
                       >

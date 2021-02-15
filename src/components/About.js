@@ -154,7 +154,7 @@ const About = (props) => {
         <div className="faculty__content">
           <Coordinators
             image={Vineet}
-            name="Vineet Kaushik"
+            name="Vineet Rathee"
             post="Secretary"
           />
           <Coordinators

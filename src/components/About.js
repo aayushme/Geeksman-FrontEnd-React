@@ -169,7 +169,7 @@ const About = (props) => {
         <Coordinators
           image={manmeet}
           name="Manmeet"
-          post="Aamazon"
+          post="Amazon"
         />
       </div>
       <div className="our__members">

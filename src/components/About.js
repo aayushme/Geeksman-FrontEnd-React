@@ -22,6 +22,9 @@ import Vineet from './images/png/vineet.PNG'
 import nitika from './images/png/nitika.PNG'
 import rishabh from './images/png/rishabh.PNG'
 import ritik from './images/png/ritik.PNG'
+import sahil from './images/png/sahil singla.jpg'
+import trilok from './images/png/trilok kaushik.jpg'
+import manmeet from './images/png/manmeet.jpg'
 import { connect } from "react-redux";
 import * as actions from "../store/actions/index";
 
@@ -147,6 +150,26 @@ const About = (props) => {
           image={image1}
           name="Dr. Komal Kumar Bhatia"
           post="Chairperson Computer Engineering dept"
+        />
+      </div>
+      <div className="faculty__coordinators">
+        <h1>Our Founders</h1>
+      </div>
+      <div className="faculty__content">
+        <Coordinators
+          image={sahil}
+          name="Sahil Singla"
+          post="Amazon"
+        />
+        <Coordinators
+          image={trilok}
+          name="Trilok Kaushik"
+          post="Samsung"
+        />
+        <Coordinators
+          image={manmeet}
+          name="Manmeet"
+          post="Aamazon"
         />
       </div>
       <div className="our__members">

@@ -51,9 +51,8 @@ const Navbar = (props) => {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link  " to="/about">
-                About
+                Aboutbtn
               </NavLink>
-             
             </li>
             {props.isAuthenticated&&(<li className="nav-item">
           <div className="nav-link logout" onClick={props.authlogout}>

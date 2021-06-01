@@ -10,7 +10,6 @@ import UserPanel from "./userpanel/userpanel";
 import { connect } from "react-redux";
 import * as actions from "../store/actions/index";
 import Loader from './Loader/Loader'
-
 class MainLayout extends Component {
 
   componentDidMount(){
@@ -52,6 +51,7 @@ class MainLayout extends Component {
   );
         }
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getContest: () => {
@@ -75,5 +75,4 @@ const mapStateToProps = (state) => {
     userid: state.auth.userid
   };
 };
-
 export default connect(mapStateToProps,mapDispatchToProps)(MainLayout);

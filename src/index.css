@@ -539,6 +539,13 @@ nav {
   margin-right: 18px;
 }
 
+.logout{
+  cursor: pointer;
+}
+.logout:hover{
+  color: var(--secondary);
+}
+
 .navbar .navbar-toggler-icon {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAAS0lEQVRoge3WoRGAMAADwJZJu0QlCtkluiksAIfhGsG/jUlcSgEAcupT0PZxrizyZh79tuu2usjXDACAJF8ozQAASPKF0gwAAP7sAvoWDBbvdnE+AAAAAElFTkSuQmCC");
 }

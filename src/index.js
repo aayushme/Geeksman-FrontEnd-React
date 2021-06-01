@@ -11,8 +11,6 @@ import questionReducer from './store/reducers/questionpage'
 import contestReducer from './store/reducers/contest'
 import userReducer from './store/reducers/users'
 import aboutReducer from './store/reducers/about'
-
-
 //Redux Store
 const composeEnhancers =
   process.env.NODE_ENV === 'development'

@@ -1,5 +1,5 @@
-export { reduxLogin, authCheckStatus, changePassword } from "./auth";
-
+export { reduxLogin, authCheckStatus, changePassword, authlogout } from "./auth";
+ 
 export { postQuestions, getQuestions } from "./questionpage";
 
 export { getContest, postContest,registerContest,getContestToken } from "./contests";

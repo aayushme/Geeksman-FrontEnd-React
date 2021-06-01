@@ -34,6 +34,14 @@ const authFail = (state, action) => {
   });
 };
 
+const authlogout=(state,action)=>{
+return updateObject(state,{
+  token:null,
+  name:null,
+  userid:null,
+})
+}
+
 const forgetSuccess = (state, action) => {
   return updateObject(state, {
     forgetstatus:action.forgetstatus,
@@ -73,6 +81,8 @@ const reducer = (state = initialState, action) => {
       return forgetSuccess(state, action);
     case actionTypes.CHANGE_PWD_FAIL:
       return forgetFail(state, action);
+    case actionTypes.AUTH_LOGOUT:
+      return authlogout(state,action);
     default:
       return state;
   }

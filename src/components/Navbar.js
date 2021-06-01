@@ -1,9 +1,10 @@
-import React,{useState} from "react";
+import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { connect } from "react-redux";
+import * as actions from "../store/actions/index";
 import { NavLink, Link } from "react-router-dom";
 import Geeksman from "./images/png/geeksman.png";
 import "bootstrap/js/src/collapse.js";
@@ -52,7 +53,14 @@ const Navbar = (props) => {
               <NavLink className="nav-link  " to="/about">
                 About
               </NavLink>
+             
             </li>
+            {props.isAuthenticated&&(<li className="nav-item">
+          <div className="nav-link logout" onClick={props.authlogout}>
+                Logout    
+          </div>
+          </li>)}
+          
             {props.isAuthenticated && (
               <div>
                 <IconButton
@@ -91,6 +99,14 @@ const Navbar = (props) => {
   );
 };
 
+const mapDispatchToProps=(dispatch)=>{
+  return {
+    authlogout:()=>{
+      dispatch(actions.authlogout())
+    }
+  }
+}
+
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
@@ -98,4 +114,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps,mapDispatchToProps)(Navbar);

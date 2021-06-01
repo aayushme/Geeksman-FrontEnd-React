@@ -73,8 +73,6 @@ export const authCheckStatus = () => {
 };
 
 /*============Redux Signup===========*/
-
-
 export const changePasswordSuccess = (status) => {
   return {
     type: actionTypes.CHANGE_PWD_SUCCESS,
@@ -89,7 +87,11 @@ export const changePasswordFail = (err) => {
   };
 };
 
-
+export const authlogout=()=>{
+  return {
+    type:actionTypes.AUTH_LOGOUT
+  }
+}
 
 export const changePassword = (email) => {
   return (dispatch) => {
@@ -103,7 +105,6 @@ export const changePassword = (email) => {
         'Content-Type': 'application/json;charset=UTF-8',
       },
     };
-
     axios
       .post(
         process.env.REACT_APP_PUBLIC+"/forgotpassword",

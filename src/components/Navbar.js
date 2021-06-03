@@ -43,7 +43,6 @@ const Navbar = (props) => {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
-            
             <li className="nav-item">
               <NavLink className="nav-link" to="/contests">
                 Contests
@@ -51,7 +50,7 @@ const Navbar = (props) => {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link  " to="/about">
-                Aboutbtn
+                About
               </NavLink>
             </li>
             {props.isAuthenticated&&(<li className="nav-item">

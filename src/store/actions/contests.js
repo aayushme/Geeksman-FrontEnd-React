@@ -1,12 +1,27 @@
 import * as actionTypes from './actionsTypes';
 import axios from 'axios';
 
+
+
+/*=============== get contests =========================*/
 export const getContestSuccess = (data) => {
   return {
     type: actionTypes.GET_CONTESTS_SUCCESS,
     contestdata:data
   };
 };
+
+export const RequestStart=()=>{
+  return {
+    type:actionTypes.BEGIN_REQUEST_LOADING,
+  }
+}
+
+export const RequestEnd=()=>{
+  return {
+    type:actionTypes.END_REQUEST_LOADING,
+  }
+}
 
 export const getContestFail = (error) => {
   return {
@@ -17,24 +32,24 @@ export const getContestFail = (error) => {
 
 export const getContest = () => {
   return (dispatch) => {   
-
+    dispatch(RequestStart())
     let axiosConfig = {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
       },
     };
-
     axios
       .get(
         process.env.REACT_APP_PUBLIC+'/contests',
         axiosConfig
       )
       .then((res) => {
-        
+        console.log('success...............')
+        dispatch(RequestEnd())
         dispatch(getContestSuccess(res.data.contests));
-
       })
       .catch((err) => {
+        dispatch(RequestEnd())
         dispatch(getContestFail(err));
       });
   };

@@ -5,10 +5,11 @@ const initialState = {
   contestdata: [
     {
       id: "1",
-      name: `<Hello World/>`,
+      contestname: `<Hello World/>`,
       starttime: "09:00:00",
       endtime: "21:00:00",
       startdate: "2021-01-22",
+      image:null,
       enddate: "2021-01-23",
       prize: "Selection in club",
       registeredusers: {
@@ -18,15 +19,15 @@ const initialState = {
       },
       contestdetails: "This contest is for auditions of GeeksmanClub 2021",
       rules: "1. Dont cheat 2.Dont Copy 3.Dont Hesitate 4.Dont Complete",
-      upcoming: "true",
-      previous: "false",
-      ongoing: "false",
+      contesttype:null
     },
-    
   ],
   loading: false,
   registeruserdata:null,
-  contesttoken:null
+  contesttoken:null,
+  ongoingcontests:[],
+  previouscontests:[],
+  upcomingcontests:[],
 };
 
 const getContestSuccess = (state, action) => {
@@ -42,6 +43,18 @@ const getContestFail = (state, action) => {
     loading: false,
   });
 };
+
+const beginloading=(state,actions)=>{
+  return updateObject(state,{
+    loading:true
+  })
+}
+
+const endloading=(state,actions)=>{
+  return updateObject(state,{
+    loading:false
+  })
+}
 
 const postContestSuccess = (state, action) => {
   return updateObject(state, {
@@ -104,6 +117,10 @@ const reducer = (state = initialState, action) => {
       return registerContestSuccess(state, action);
     case actionTypes.REGISTER_CONTEST_FAIL:
       return registerContestFail(state, action);
+    case actionTypes.BEGIN_REQUEST_LOADING:
+      return beginloading(state,action);
+    case actionTypes.END_REQUEST_LOADING:
+      return endloading(state,action)
     case actionTypes.GET_CONTEST_TOKEN_SUCCESS:
       return getContestTokenSuccess(state, action);
     case actionTypes.GET_CONTEST_TOKEN_FAIL:

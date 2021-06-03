@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Modal from "../utils/modals/modal";
 import { Redirect } from "react-router-dom";
 import Loader from '../Loader/Loader'
+import Navbar from "../Navbar";
 
 class ContestHome extends Component {
   state = {
@@ -69,11 +70,11 @@ class ContestHome extends Component {
     return (
       <>
       <div id="contest-home">
-        
-        <ContestHeader content="Contests" />
+        <Navbar/>
+        <ContestHeader content="Contest Details" />
         <div className="row">
-          <div className="col-md-7">
-            <div className="contest-name">{this.props.data[id].Contestname}</div>
+          <div className="col-md-7" style={{"paddingLeft":"6rem"}}>
+            <div className="contest-name">{this.props.data[id].contestname}</div>
             <div className="contest-remaining-time">
               The contest will start at {this.props.data[id].starttime}{" "}
             </div>

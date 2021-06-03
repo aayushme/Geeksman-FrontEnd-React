@@ -757,13 +757,14 @@ nav {
   font-size: 20px;
   font-weight: 600;
   padding: 16px;
-  background-color: #eee;
+  background-color: #eee!important;
+  
   margin-bottom: 24px;
 }
 
 .contests-section-heading {
   display: inline-block;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 600;
 }
 
